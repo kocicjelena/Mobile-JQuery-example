@@ -1,0 +1,388 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta name=viewport content="user-scalable=no,width=device-width" />
+  <meta name="" content="yes" />
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+   <script src="novi.js"></script>
+   <script>
+   $(document).on('pagebeforeshow', '#index', function(){       
+    $('#custom-btn').changeButtonText('This is a new text');
+});
+
+        (function($) {
+            /*
+             * Changes the displayed text for a jquery mobile button.
+             * Encapsulates the idiosyncracies of how jquery re-arranges the DOM
+             * to display a button for either an <a> link or <input type="button">
+             */
+            $.fn.changeButtonText = function(newText) {
+                return this.each(function() {
+                    $this = $(this);
+                    if( $this.is('a') ) {
+                        $('span.ui-btn-text',$this).text(newText);
+                        return;
+                    }
+                    if( $this.is('input') ) {
+                        $this.val(newText);
+                        // go up the tree
+                        var ctx = $this.closest('.ui-btn');
+                        $('span.ui-btn-text',ctx).text(newText);
+                        return;
+                    }
+                });
+            };
+        })(jQuery);
+$(document).ready(function() {
+ 
+   $( ".myButton" ).on( "click", function() {
+ 
+      var dirName = $.mobile.path.get( $( this ).attr( "value" ) );
+ 
+    $( "#myResult" ).html( String( dirName ) );
+ })
+});
+$.mobile.changePage( "noviinput.html", {
+	type: "post",
+	data: $("form#fname").serialize()
+});
+$(function(){
+ $("#btn1").click(function(){
+    $( this ).attr( "value" );
+  });});
+</script>
+</head> 
+
+<body> 
+
+<div data-role=page id=home>
+  <div data-role=header>
+     <a HREF="../index.html" data-icon="back" data-iconpos="notext" data-role=button rel="external">NAZAD</a>
+   
+	 <a href="../nav.html" data-icon="search" data-iconpos="notext" data-transition="fade">Search</a>
+	
+    <h1>RASHODI NIŠ</h1>
+  </div>
+
+  <div data-role=content>
+  <table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="ui-responsive table-stroke">
+  <thead>
+    <tr>
+      <th data-priority="2"></th>
+      <th></th>
+      <th data-priority="3"></th>
+      <th data-priority="1"><abbr title=""></abbr></th>
+      <th data-priority="5"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>NIS
+      <th></th>
+      <td><a href="" data-rel="external"></a></td>
+      <td>januar</td>
+      <td>februar</td>
+      <td>mart</td>
+	  <td>april</td>
+	  <td>maj</td>
+	  <td>jun</td>
+	  <td>jul</td>
+	  <td>avgust</td>
+	  <td>septembar</td>
+	  <td>oktobar</td>
+	  <td>novembar</td>
+	  <td>decembar</td>
+    </tr>
+    <tr>
+      <th>struja</th>
+      <td><a href="" data-rel="external"/></a></td>
+      <td><input type="button" id="dodaj" data-role="button" data-icon="refresh" data-theme="b" data-inline="true" value="strujajan"></td>
+      <td> <input type="text" value="x" /><input type="button" value="Remove x inputs" /></td>
+      <td></td>
+	  <td> <input type="button" value="#foo" id="button9" class="myButton" data-inline="true" /><div id="myResult">The result </div></td>
+	  <td></td>
+	  <td>  <form method="post" action="#strujafeb">
+      <label for="fname"></label>
+      <input type="text" name="fname" id="fname" value="fname">
+    </form></td>
+	  <td> </td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+    <tr>
+      <th>voda</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td>
+	    <table data-role="table" id="vodajanuar" data-mode="columntoggle" class="ui-responsive table-stroke">
+  <thead>
+    <tr>
+      <th data-priority="2"></th>
+      <th></th>
+      <th data-priority="3"></th>
+      <th data-priority="1"><abbr title=""></abbr></th>
+      <th data-priority="5"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>zaduzenje</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>nije placeno</th>
+      <td><a href="" data-rel="external"/></a></td>
+      <td><input type="button" id="vj" data-role="button" data-icon="refresh" data-theme="c" data-inline="true" value="dodaj voda, januar"></td>
+    </tr>
+    <tr>
+      <th>datum</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+ 
+	  </td>
+      <td>
+	  <form method="post" action="#grejanjejan">
+      <label for="grejanjejan"></label>
+      <input type="text" name="grejanjejan" id="grejanjejan" value="grejanjejan">
+    </form>
+	  </td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+    <tr>
+      <th>grejanje</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td><form method="post" action="#grejanjejan">
+      <label for="grejanjemart"></label>
+      <input type="text" name="grejanjemart" id="grejanjemart" value="grejanjemart">
+    </form></td>
+      <td><a href="page-transitions-dialog.html" data-rel="dialog" data-transition="turn" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+</td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+    <tr>
+      <th>fiksni telefon</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>mobilni telefon</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>internet</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>zakup objekta</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>higijeničarka</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>video nadzor</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>invest.održavanje</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>kancelarijski materijal</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>štampači, toneri</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>putni troškovi</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>gorivo za kola</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+  </tbody>
+</table>
+<input type="button" id="add_and_refresh" data-role="button" data-icon="refresh" data-theme="c" data-inline="true" value="dodaj rashod">
+  </div>
+</div>
+	<div data-role=page id=dn data-add-back-btn=true>
+  <div data-role=header>
+    <h1>dnevni izvestaj</h1>
+  </div>
+<div role="main" class="ui-content"  data-content-theme=b>
+    <p> izvestaj </p>  
+	<a href="page-transitions-page.html" data-transition="flip" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="turn" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="flow" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidefade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="none" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+ xmlDoc = $.parseXML( xml ),
+    $xml = $( xmlDoc ),
+    $email= $xml.find( "AttendeeEmail" ).text();
+
+alert($email);
+
+var contenu = $("#champ").val() ;
+$("#envoi_search").click(function() {
+    $.ajax({
+        type: "POST",
+        url: "http://www.edumobile.org/blog/uploads/XML-parsing-data/Data.xml",
+        data: "{}",
+        cache: false,
+        dataType: "xml",
+        success: function(data) {
+                            $(data).find("Book").each(function () {
+                                if($(this).find("name").text() == contenu) {
+                                    $("#result").append("<br> Titre : " + $(this).find("name").text());
+                                    $("#result").append("<br> Auteur : " + $(this).find("address").text());
+                                    $("#result").append("<br> Pays : " + $(this).find("country").text());
+                                }
+                            });
+                            if($("#result").is(':empty')) {
+                                $("#error").append("Désolé Aucun livre n\'a été trouvé") ;
+                            }
+                        }
+    });
+});
+Here is an example: http://jsfiddle.net/MVzgL/
+
+This is the error output:
+
+XMLHttpRequest cannot load http://www.edumobile.org/blog/uploads/XML-parsing-data/Data.xml. Origin http://fiddle.jshell.net is not allowed by Access-Control-Allow-Origin.
+
+So if you are running this code on any domain other than www.edumobile.org then it won't be able to function. You can however setup a server-side proxy that grabs the remote content and then you call the proxy from your JS since it will be on the same domain. Setting-up this proxy is quite easy, you'd just request the information and then output it for JS (many server-side languages have native JSON encoding).

@@ -1,0 +1,270 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset238 Calibri;}{\f1\fnil\fcharset0 Calibri;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9242\f0\fs22 byte[] postData;\par
+\par
+//set postData\par
+\par
+HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://another-server/service/");\par
+request.Method = "POST";\par
+request.ContentType="application/x-www-form-urlencoded";\par
+request.ContentLength = postData.Length;\par
+\par
+Stream response=request.GetRequestStream();\par
+response.Write(postData,0,postData.Length);\par
+response.Close();\par
+// Load the data for a specific category, based on\par
+// the URL passed in. Generate markup for the items in the\par
+// category, inject it into an embedded page, and then make\par
+// that page the current active page.\par
+function showCategory( urlObj, options )\par
+\{\par
+    var categoryName = urlObj.hash.replace( /.*category=/, "" ),\par
+\par
+        // Get the object that represents the category we\par
+        // are interested in. Note, that at this point we could\par
+        // instead fire off an ajax request to fetch the data, but\par
+        // for the purposes of this sample, it's already in memory.\par
+        category = categoryData[ categoryName ],\par
+\par
+        // The pages we use to display our content are already in\par
+        // the DOM. The id of the page we are going to write our\par
+        // content into is specified in the hash before the '?'.\par
+        pageSelector = urlObj.hash.replace( /\\?.*$/, "" );\par
+\par
+    if ( category ) \{\par
+        // Get the page we are going to dump our content into.\par
+        var $page = $( pageSelector ),\par
+\par
+            // Get the header for the page.\par
+            $header = $page.children( ":jqmData(role=header)" ),\par
+\par
+            // Get the content area element for the page.\par
+            $content = $page.children( ":jqmData(role=content)" ),\par
+\par
+            // The markup we are going to inject into the content\par
+            // area of the page.\par
+            markup = "<p>" + category.description + "</p><ul data-role='listview' data-inset='true'>",\par
+\par
+            // The array of items for this category.\par
+            cItems = category.items,\par
+\par
+            // The number of items in the category.\par
+            numItems = cItems.length;\par
+\par
+        // Generate a list item for each item in the category\par
+        // and add it to our markup.\par
+        for ( var i = 0; i < numItems; i++ ) \{\par
+            markup += "<li>" + cItems[i].name + "</li>";\par
+        \}\par
+        markup += "</ul>";\par
+\par
+        // Find the h1 element in our header and inject the name of\par
+        // the category into it.\par
+        $header.find( "h1" ).html( category.name );\par
+\par
+        // Inject the category items markup into the content element.\par
+        $content.html( markup );\par
+\par
+        // Pages are lazily enhanced. We call page() on the page\par
+        // element to make sure it is always enhanced before we\par
+        // attempt to enhance the listview markup we just injected.\par
+        // Subsequent calls to page() are ignored since a page/widget\par
+        // can only be enhanced once.\par
+        $page.page();\par
+\par
+        // Enhance the listview we just injected.\par
+        $content.find( ":jqmData(role=listview)" ).listview();\par
+\par
+        // We don't want the data-url of the page we just modified\par
+        // to be the url that shows up in the browser's location field,\par
+        // so set the dataUrl option to the URL for the category\par
+        // we just loaded.\par
+        options.dataUrl = urlObj.href;\par
+\par
+        // Now call changePage() and tell it to switch to\par
+        // the page we just modified.\par
+        $.mobile.changePage( $page, options );\par
+    \}\par
+\}\par
+\par
+<ul data-role="listview" data-inset="true" data-theme="d" data-divider-theme="d">\par
+\tab\tab\tab\tab <li data-role="list-divider">Links that will be Ajax-loaded with page transitions</li>\par
+\tab\tab\tab\tab <li><a href="../../index.html">Link in the same domain</a></li>\par
+\tab\tab\tab\tab <li><a href="../pages/dialog.html" data-rel="dialog">Dialog link: data-rel="dialog" (not tracked in history)</a></li>\par
+\tab\tab\tab\tab <li data-role="list-divider">Links that will refresh the page</li>\par
+\tab\tab\tab\tab <li><a href="http://www.jquery.com">External domain</a></li>\par
+\tab\tab\tab\tab <li><a href="../../index.html" rel="external">Link with rel="external"</a></li>\par
+\tab\tab\tab\tab <li><a href="index.html" data-ajax="false">link with [data-ajax="false"]</a></li>\par
+\tab\tab\tab\tab <li><a href="../../index.html" target="foo">Link with target="foo"</a></li>\par
+\tab\tab\tab\tab <li data-role="list-divider">Email links</li>\par
+\tab\tab\tab\tab <li><a href="mailto:jdoe@foo.com">Basic email: {\field{\*\fldinst{HYPERLINK "mailto:jdoe@foo.com</a></li"}}{\fldrslt{\ul\cf1 mailto:jdoe@foo.com</a></li}}}\f0\fs22 >\par
+\tab\tab\tab\tab <li><a href="mailto:jdoe@foo.com?cc=bill@bar.com&bcc=mark@abc.com&subject=Happy%20Birthday&body=Best%20wishes!">Mailto with a cc:, bcc:, subject and body pre-filled</a></li>\par
+\par
+\tab\tab\tab\tab <li data-role="list-divider">Phone links</li>\par
+\tab\tab\tab\tab <li><a href="tel:15555555555">Phone: tel:15555555555</a></li>\par
+\tab\tab\tab\tab <li data-role="list-divider">Other</li>\par
+\tab\tab\tab\tab <li><a href="#">A href="#" will return false</a></li>\par
+\tab\tab\tab </ul>\par
+\pard\sa200\sl276\slmult1\lang1033\f1 var xmlDocument = [create xml document];\par
+var xmlRequest = $.ajax(\{\par
+  url: "page.php",\par
+  processData: false,\par
+  data: xmlDocument\par
+\});\par
+ \par
+xmlRequest.done( handleResponse );\par
+'''\par
+post some XML data to a URL\par
+'''\par
+\par
+// Load and parse the JSON\par
+var someJSON = /* Omitted: fetch it from the server  however you want */;\par
+var parsed = JSON.parse(someJSON);\par
+ \par
+// Update view model properties\par
+viewModel.firstName(parsed.firstName);\par
+viewModel.pets(parsed.pets);\par
+In many scenarios, this direct approach is the simplest and  most flexible solution. Of course, as you update the properties  on your view model, Knockout will take care of updating the  visible UI to match it.\par
+\par
+However, many developers prefer to use a more  conventions-based approach to updating their view models  using incoming data without manually writing a line of code  for every property to be updated. This can be beneficial if  your view models have many properties, or deeply nested data  structures, because it can greatly reduce the amount of  manual mapping code you need to write. For more details  about this technique, see the knockout.mapping plugin.\par
+\par
+''''\par
+t actually goes to JSON and then to XML, but here's an  adaption of json2xml.js specifically for use with jQuery's  serializeArray function:\par
+\par
+\par
+function json2xml(o, tab) \{\par
+  var toXml = function(v, name, ind) \{\par
+    var xml = "";\par
+    if (typeof(v) == "object") \{\par
+      var hasChild = false;\par
+      for (var m in v) \{\par
+        if (m.charAt(0) == "@") \{\par
+          xml += " " + m.substr(1) + "=\\"" + v[m].toString() +  "\\"";\par
+        \} else \{\par
+          hasChild = true;\par
+        \}\par
+      \}\par
+      if (hasChild) \{\par
+        for (var m in v) \{\par
+          if (m=="name") \{\par
+            xml += "<" + v[m] + ">" + v['value'] + "";\par
+          \}\par
+        \}\par
+      \}\par
+    \}\par
+    return xml;\par
+  \}, xml="";\par
+  for (var m in o) \{\par
+    xml += toXml(o[m], m, "");\par
+  \}\par
+\par
+  return "\par
+"+xml+"\par
+";\par
+\par
+\}\par
+and then I call it like this:\par
+\par
+var formjson = $('form#myform').serializeArray();\par
+//var formxml = $.compactJSON(mjson);\par
+var formxml = json2xml(formjson);\par
+alert(formxml);\par
+$.post("/collect.cgi", \{ 'data': formxml \}, function (data)\{ \});\par
+Check it out\par
+\par
+ xmlDoc = $.parseXML( xml ),\par
+    $xml = $( xmlDoc ),\par
+    $email= $xml.find( "AttendeeEmail" ).text();\par
+\par
+alert($email);\par
+\par
+var contenu = $("#champ").val() ;\par
+$("#envoi_search").click(function() \{\par
+    $.ajax(\{\par
+        type: "POST",\par
+        url: "{\field{\*\fldinst{HYPERLINK "http://www.edumobile.org/blog/uploads/XML-parsing-data/Data.xml"}}{\fldrslt{\ul\cf1 http://www.edumobile.org/blog/uploads/XML-parsing-data/Data.xml}}}\f1\fs22 ",\par
+        data: "\{\}",\par
+        cache: false,\par
+        dataType: "xml",\par
+        success: function(data) \{\par
+                            $(data).find("Book").each(function () \{\par
+                                if($(this).find("name").text() == contenu) \{\par
+                                    $("#result").append("<br> Titre : " + $(this).find("name").text());\par
+                                    $("#result").append("<br> Auteur : " + $(this).find("address").text());\par
+                                    $("#result").append("<br> Pays : " + $(this).find("country").text());\par
+                                \}\par
+                            \});\par
+                            if($("#result").is(':empty')) \{\par
+                                $("#error").append("D\'e9sol\'e9 Aucun livre n\\'a \'e9t\'e9 trouv\'e9") ;\par
+                            \}\par
+                        \}\par
+    \});\par
+\});\par
+Here is an example: {\field{\*\fldinst{HYPERLINK "http://jsfiddle.net/MVzgL/"}}{\fldrslt{\ul\cf1 http://jsfiddle.net/MVzgL/}}}\f1\fs22\par
+\par
+This is the error output:\par
+\par
+XMLHttpRequest cannot load {\field{\*\fldinst{HYPERLINK "http://www.edumobile.org/blog/uploads/XML-parsing-data/Data.xml"}}{\fldrslt{\ul\cf1 http://www.edumobile.org/blog/uploads/XML-parsing-data/Data.xml}}}\f1\fs22 . Origin {\field{\*\fldinst{HYPERLINK "http://fiddle.jshell.net"}}{\fldrslt{\ul\cf1 http://fiddle.jshell.net}}}\f1\fs22  is not allowed by Access-Control-Allow-Origin.\par
+\par
+So if you are running this code on any domain other than {\field{\*\fldinst{HYPERLINK "www.edumobile.org"}}{\fldrslt{\ul\cf1 www.edumobile.org}}}\f1\fs22  then it won't be able to function. You can however setup a server-side proxy that grabs the remote content and then you call the proxy from your JS since it will be on the same domain. Setting-up this proxy is quite easy, you'd just request the information and then output it for JS (many server-side languages have native JSON encoding).\par
+{\field{\*\fldinst{HYPERLINK "http://www.w3.org/MarkUp/Forms/#waXForms"}}{\fldrslt{\ul\cf1 http://www.w3.org/MarkUp/Forms/#waXForms}}}\f1\fs22\par
+{\field{\*\fldinst{HYPERLINK "http://pentestmonkey.net/blog/csrf-xml-post-request"}}{\fldrslt{\ul\cf1 http://pentestmonkey.net/blog/csrf-xml-post-request}}}\f1\fs22\par
+CALLBACK to a URL with some data post\par
+response as XML. It is not necessary (but optional) to  explicitly specify the contentType: ContentType.XML  parameter\par
+How to post a xml value to web api?\par
+Google Docs Viewer plugin for jQuery\par
+\par
+Here's a little jQuery plugin I wrote recently that automatically embeds the Google Docs Viewer for viewing pdf, doc, docx, ppt and tiff files linked to by anchor tags.\par
+\par
+The Google Docs Viewer is an embeddable browser-based viewer that requires only a URL to a file available online. This neatly bypasses the need for users to have compatible software on their machines for those file types and displays the document right in the browser.\par
+\par
+Usage\par
+\par
+1. Add jQuery and the gDocsViewer plugin to the page.\par
+1.\par
+<head>\par
+2.\par
+<script type="text/javascript" src="jquery.min.js"></script>\par
+3.\par
+<script type="text/javascript" src="jquery.gdocsviewer.min.js"></script>\par
+4.\par
+</head>\par
+\par
+2. Set some class name or id to the anchor tag for all URLs to files that you want to be displayed using the Google Docs Viewer. E.g. "embed"\par
+1.\par
+<a href="urltofile.pdf" class="embed">Download file</a>\par
+1.\par
+<a href="urltofile.pdf" id="embedURL">Download file</a>\par
+\par
+3. Initialize gDocsViewer and set it to process the URL with id or all URLs with the class name set in the previous step.\par
+1.\par
+$('a.embed').gdocsViewer();\par
+1.\par
+$('#embedURL').gdocsViewer();\par
+\par
+Customization\par
+\par
+The plugin offers two configuration options that set the width and height of the embedded document IFRAME. This can be set when the plugin is initialized.\par
+1.\par
+$('a.embed').gdocsViewer(\{ width: 400, height: 500 \});\par
+\par
+The plugin inserts a the IFRAME for the viewer inside an injected DIV. The DIV tags all carry the class name "gdocsviewer", which allow for styling all the gdocsViewer instances via CSS. If the anchor tag has the ID attribute defined, then the injected DIV tag is also set an ID attribute in the format of ID_of_Anchor + '-gdocsviewer'. See the demo source code for more details.\par
+\par
+Demo\par
+\par
+- Check out the live demonstration\par
+\par
+License\par
+This script is released under the Open Source MIT License, allowing its use in both personal and commercial applications as long as the copyright and license permission notice remains intact.\par
+\par
+Download\par
+- jquery.gdocsviewer.v1.0.zip (v1.0, 2.2KB)\par
+\par
+Enjoy!\par
+This entry was posted by Jaa on Monday, February 21. 2011 at 18:00. You can leave a response, or trackback from your own blog.\par
+Defined tags for this entry: gdocsviewer, google docs viewer, javascript, jquery, plugin, projects, release\par
+Related entries by tags: Three years with magnetic implants ZOHO Viewer plugin for jQuery Thaana Text Render class for PHP 5 - v1.0 Page to Unicode Thaana 1.0 Magnetic implant X-ray\par
+Email this \bullet  Share on Facebook \bullet  Digg This! \bullet  Save to del.icio.us \bullet  AddThis!\par
+Trackbacks\par
+}
+ 

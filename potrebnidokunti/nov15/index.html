@@ -1,0 +1,102 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="angular.min.js"></script>
+    <script src="script.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+  </head>
+  <body>
+<script>
+var db;
+
+function indexedDBOk() {
+	return "indexedDB" in window;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+
+	//No support? Go in the corner and pout.
+	if(!indexedDBOk) return;
+
+	var openRequest = indexedDB.open("todobaza",1);
+
+	openRequest.onupgradeneeded = function(e) {
+		var thisDB = e.target.result;
+
+		if(!thisDB.objectStoreNames.contains("people")) {
+			var os = thisDB.createObjectStore("people", {autoIncrement:true});
+			//I want to get by name later
+			os.createIndex("name", "name", {unique:false});
+			//I want email to be unique
+			os.createIndex("email", "email", {unique:true});
+		}
+	}
+
+	openRequest.onsuccess = function(e) {
+		db = e.target.result;
+
+		//Listen for add clicks
+		document.querySelector("#addButton").addEventListener("click", addPerson, false);
+
+		//Listen for get clicks
+		document.querySelector("#getButton").addEventListener("click", getPerson, false);
+
+	}	
+
+	openRequest.onerror = function(e) {
+		//Do something for the error
+	}
+
+
+},false);
+</script>
+<input type="text" id="name" placeholder="Name"><br/>
+<input type="email" id="email" placeholder="Email"><br/>
+<button id="addButton">Add Data</button>
+
+<p/>
+
+<input type="text" id="nameSearch" placeholder="Name"><br/>
+<button id="getButton">Get By Name</button>
+
+<p/>
+
+<div id="status"></div>
+<input type="text" id="status10"></div>
+    <div ng-controller="Controller">
+      <form novalidate class="simple-form">
+        Name: <input type="text" ng-model="user.name" /><br />
+        E-mail: <input type="email" ng-model="user.email" /><br />
+        Gender: <input type="radio" ng-model="user.gender" value="male" />male
+        <input type="radio" ng-model="user.gender" value="female" />female<br />
+        <button ng-click="reset()">RESET</button>
+        <button ng-click="update(user)">SAVE</button>
+      </form>
+      <pre>form = {{user | json}}</pre>
+      <pre>master = {{master | json}}</pre>
+	  <pre>master = {{master.name}}</pre>
+    
+	<button ng-click='sayHello()'>greet</button>
+	 <hr>
+	{{greeting}}
+	<script>
+	var JSONObject= {
+"name":"",
+"street":"", 
+"age":,
+"phone":""};
+document.getElementById("jname").innerHTML=JSONObject.name 
+document.getElementById("jage").innerHTML=JSONObject.age 
+document.getElementById("jstreet").innerHTML=JSONObject.street 
+document.getElementById("jphone").innerHTML=JSONObject.phone 
+</script>
+<p>
+Name: <span id="jname"></span><br /> 
+Age: <span id="jage"></span><br /> 
+Address: <span id="jstreet"></span><br /> 
+Phone: <span id="jphone"></span><br /> 
+</p>
+	</div>
+  </body>
+</html>

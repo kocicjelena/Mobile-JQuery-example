@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="JK">
+
+  <title></title>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+ <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+ 	<!--<link rel="stylesheet" href="css/1.css" />-->
+	<script src="js/js.js"></script>
+	<script src="js/jqm-docs.js"></script>
+	 <link rel="stylesheet" href="css/jqm-docs.css" />
+  <!-- This shim will let your indexedDB code run in Safari and Opera as well! The nice & sweet thing is that you are now ready (with the same code) to built a mobile web app that will work both on iOS, Android and other OS that got Opera 
+  
+  <script src="http://axemclion.github.com/IndexedDBShim/dist/IndexedDBShim.min.js"></script>
+-->
+
+<style>
+  /* Basic styles */
+.rwd-example .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example .ui-block-a,
+.rwd-example .ui-block-b,
+.rwd-example .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example .ui-block-a,
+    .rwd-example .ui-block-c {
+      float: left;
+      width: 14.925%;
+    }
+    .rwd-example .ui-block-a p,
+    .rwd-example .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example .ui-block-b{
+      float: left;
+      width: 70.15%;
+    }
+    .rwd-example .ui-block-a,
+    .rwd-example .ui-block-c {
+      float: left;
+      width: 14.925%;
+    }
+    .rwd-example > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example .ui-block-b {
+      float: left;
+      width: 70.15%;
+    }
+    .rwd-example .ui-block-a {
+      float: left;
+      width: 14.925%;
+    }
+    .rwd-example .ui-block-c {
+      float: left;
+      width: 14.925%;
+    }
+}
+  /* Basic styles */
+.rwd-example2 .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example2 p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example2 .ui-block-a,
+.rwd-example2 .ui-block-b,
+.rwd-example2 .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example2 > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example2 {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example2 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example2 .ui-block-b,
+	.rwd-example2 .ui-block-c {
+      float: left;
+      width: 37.53%;
+    }
+    .rwd-example2 .ui-block-a p,
+    .rwd-example2 .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example2 > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example2 > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example2 > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example2 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example .ui-block-b,
+    .rwd-example2 .ui-block-c {
+      float: left;
+      width: 37.53%;
+    }
+    .rwd-example2 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example2 > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example2 > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example2 .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example2 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+	.rwd-example2 .ui-block-b,
+    .rwd-example2 .ui-block-c {
+      float: left;
+      width: 37.53%;
+    }
+	 h6 {
+      float: right;
+      width: 20em;
+    }
+}
+  /* Basic styles */
+.rwd-example3 .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example3 p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example3 .ui-block-a,
+.rwd-example3 .ui-block-b,
+.rwd-example3 .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example3 > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example3 {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example3 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example3 .ui-block-b,
+	.rwd-example3 .ui-block-c {
+      float: left;
+      width: 49.95%;
+    }
+    .rwd-example3 .ui-block-a p,
+    .rwd-example3 .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example3 > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example3 > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example3 > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example3 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example3 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example3 .ui-block-c {
+      float: left;
+      width: 49.95%;
+    }
+    .rwd-example3 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example3 > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example3 > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example3 .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example3 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+	.rwd-example3 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example3 .ui-block-c {
+      float: left;
+      width: 49.95%;
+    }
+}
+.ui-icon-myicon:after {
+    background-image: url("img/img.jpg");
+    /* Make your icon fit */
+    background-size: 18px 18px;
+}
+  /* Basic styles */
+.rwd-example4 .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example4 p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example4 .ui-block-a,
+.rwd-example4 .ui-block-b,
+.rwd-example4 .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example4 > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example4 {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example4 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example4 .ui-block-b {
+      float: left;
+      width: 49.95%;
+    }
+	.rwd-example4 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+	.rwd-example4 .ui-block-c {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example4 .ui-block-a p,
+    .rwd-example4 .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example4 > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example4 > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example4 > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example4 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example4 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example4 .ui-block-c {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example4 .ui-block-b {
+      float: left;
+      width: 49.94%;
+    }
+    .rwd-example4 > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example4 > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example4 .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example4 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+	.rwd-example4 .ui-block-b {
+      float: left;
+      width: 49.94%;
+    }
+    .rwd-example4 .ui-block-c {
+      float: left;
+      width: 24.925%;
+    }
+}
+  /* Basic styles */
+.rwd-example5 .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example5 p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example5 .ui-block-a,
+.rwd-example5 .ui-block-b,
+.rwd-example5 .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example5 > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example5 {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example5 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example5 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+	.rwd-example5 .ui-block-a {
+      float: left;
+      width: 37.5375%;
+    }
+	.rwd-example5 .ui-block-c {
+      float: left;
+      width: 37.5375%;
+    }
+    .rwd-example5 .ui-block-a p,
+    .rwd-example5 .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example5 > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example5 > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example5 > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example5 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example5 .ui-block-a {
+      float: left;
+      width: 37.5375%;
+    }
+    .rwd-example5 .ui-block-c {
+      float: left;
+      width: 37.5375%;
+    }
+    .rwd-example5 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example5 > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example5 > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example5 .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example5 .ui-block-a {
+      float: left;
+      width: 37.5375%;
+    }
+	.rwd-example5 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example5 .ui-block-c {
+      float: left;
+      width: 37.5375%;
+    }
+}
+</style>
+  <script>
+      var dbName = "j2";
+      var dbVersion = 4;
+      var todoDB = {};
+      var indexedDB = window.indexedDB || window.webkitIndexedDB ||
+        window.mozIndexedDB;
+
+      if ('webkitIndexedDB' in window) {
+        //   window.IDBTransaction = window.webkitIDBTransaction;
+        window.IDBKeyRange = window.webkitIDBKeyRange;
+      }
+
+      todoDB.indexedDB = {};
+      todoDB.indexedDB.db = null;
+
+      $(document).bind('pageinit', function() {
+        console.log("-- lets start the party --");
+        todoDB.indexedDB.open();
+        $("#addItem").click(function() {
+          addTodo();
+        });
+      });
+
+      todoDB.indexedDB.onerror = function(e) {
+        console.log(e);
+      };
+
+      todoDB.indexedDB.open = function() {
+        var request = indexedDB.open(dbName, dbVersion);
+
+        request.onsuccess = function(e) {
+          console.log ("success our DB: " + dbName + " is open and ready for work");
+          todoDB.indexedDB.db = e.target.result;
+          todoDB.indexedDB.getAllTodoItems();
+        }
+        
+        request.onupgradeneeded = function(e) {
+          todoDB.indexedDB.db = e.target.result;
+          var db = todoDB.indexedDB.db;
+          console.log ("Going to upgrade our DB from version: "+ e.oldVersion + " to " + e.newVersion);
+
+            try {
+              if (db.objectStoreNames && db.objectStoreNames.contains("todo")) {
+                db.deleteObjectStore("todo");
+              }
+            }
+            catch (err) {
+              console.log("got err in objectStoreNames:" + err);
+            }
+            var store = db.createObjectStore("todo",
+                {keyPath: "timeStamp"});
+            console.log("-- onupgradeneeded store:"+ JSON.stringify(store));
+          }
+       
+        request.onfailure = function(e) {
+          console.error("could not open our DB! Err:"+e);  
+        }
+        
+        request.onerror = function(e) {
+          console.error("Well... How should I put it? We have some issues with our DB! Err:"+e);
+        }
+      };
+
+      todoDB.indexedDB.addTodo = function(todoText) {
+        var db = todoDB.indexedDB.db;
+        var trans = todoDB.indexedDB.db.transaction("todo", "readwrite");
+        var store = trans.objectStore("todo");
+
+        var data = {
+          "text": todoText,
+          "timeStamp": new Date().getTime()
+        };
+
+        var request = store.put(data);
+
+        request.onsuccess = function(e) {
+          todoDB.indexedDB.getAllTodoItems();
+        };
+
+        request.onerror = function(e) {
+          console.error("Error Adding an item: ", e);
+        };
+      };
+
+      todoDB.indexedDB.deleteTodo = function(id) {
+        var db = todoDB.indexedDB.db;
+        var trans = db.transaction("todo", "readwrite");
+        var store = trans.objectStore("todo");
+
+        var request = store.delete(id);
+
+        request.onsuccess = function(e) {
+          todoDB.indexedDB.getAllTodoItems();
+        };
+
+        request.onerror = function(e) {
+          console.error("Error deleteing: ", e);
+        };
+      };
+
+      todoDB.indexedDB.getAllTodoItems = function() {
+        var todos = document.getElementById("todoItems");
+        todos.innerHTML = "";
+
+        var db = todoDB.indexedDB.db;
+        var trans = db.transaction("todo", "readonly");
+        var store = trans.objectStore("todo");
+
+        // Get everything in the store;
+        var keyRange = IDBKeyRange.lowerBound(0);
+        var cursorRequest = store.openCursor(keyRange);
+
+        cursorRequest.onsuccess = function(e) {
+          var result = e.target.result;
+          if(!!result == false)
+            return;
+
+          renderTodo(result.value);
+          result.continue();
+        };
+
+        cursorRequest.onerror = todoDB.indexedDB.onerror;
+      };
+
+      function renderTodo(row) {
+        var todos = document.getElementById("todoItems");
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        var t = document.createTextNode(row.text);
+
+        a.addEventListener("click", function() {
+          todoDB.indexedDB.deleteTodo(row.timeStamp);
+        }, false);
+        // some fun with jquery mobile data attributes
+        a.setAttribute("href", "#");
+        a.setAttribute("data-iconpos", "notext");
+        a.setAttribute("data-role", "button");
+        a.setAttribute("data-icon", "delete"); 
+        a.setAttribute("data-inline", "true");
+        
+        li.appendChild(a);
+        li.appendChild(t);
+        todos.appendChild(li)
+        // And lets create the new il item with its markup
+        $("#todoItems").trigger('create'); 
+      }
+
+      // Add an item only if we have more then zero letters
+      function addTodo() {
+        var todo = document.getElementById("todo");
+        if (todo.value.length > 0) {
+          todoDB.indexedDB.addTodo(todo.value);
+          todo.value = "";
+        }  
+      }
+
+    
+      // use it in case you wish to work on specific 'set' of data
+      function showAll() {
+        document.getElementById("ourList").innerHTML = "" ;   
+        var request = window.indexedDB.open(dbName);
+        request.onsuccess = function(event) {
+          // Enumerate the entire object store.
+          var db = todoDB.indexedDB.db;
+          var trans = db.transaction("todo", "readonly");
+          var request = trans.objectStore("todo").openCursor();
+          var ul = document.createElement("ul");
+          request.onsuccess = function(event) {
+            var cursor = request.result || event.result;
+            // If cursor is null then we've completed the enumeration.
+            if (!cursor) {
+              document.getElementById("ourList").appendChild(ul);
+              return;
+            }
+            var li = document.createElement("li");
+            li.textContent = "key: " + cursor.key + " => Todo text: " + cursor.value.text;
+            ul.appendChild(li);
+            cursor.continue();
+          }
+        }                    
+      }
+      </script>
+
+</head>
+<body>
+  <div data-role="page" id="indexpage" data-content-theme=a>
+
+    <div data-role="header" data-content-theme=b>
+		<br />
+ 
+	
+     	<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	<br />
+ <h1><a href=http://www.advokatbata.co.rs/ id=bata data-role=button> Advokatska kancelarija STOJANOVIĆ </a></h1>
+
+    </div>
+    <!-- /header -->
+	<div role="main" class="ui-content"  data-content-theme=b>
+    
+	
+	 <div class="rwd-example5">
+    <div class=ui-block-a class=ui-body-b>
+       
+             <h2 style="text-align:center">Advokatska kancelarija <br/> </h2><h1 style="text-align:center; font-size:250%;">STOJANOVIĆ<h1>
+			<h5 style="text-align:center"><br/> OSNOVANA 1997 <br/><br/>Niš, Voždova 7/4</h5>
+	  
+    </div>
+    <!-- secondary story block #1 -->
+    <div class=ui-block-b class=ui-body-b>
+        <h1><a href="img/" title=""><img src="img/advo.jpg" alt="bata"></a>	</h1>
+	  
+    </div>
+    <!-- secondary story block #2 -->
+    <div class=ui-block-c class=ui-body-b>
+	        <div class=ui-block-c>
+			<input type="text" id="zag" name="zag" placeholder="" style="width: 10.2em; height: 5.2em; float: right;" /></div>
+			<br/><br/><br/>
+			<h6 style="text-align:center">Advokat </h6><h2 style="text-align:center">Bratislav S.Stojanović </h2><h6 style="text-align:center">mob. 063/77 69 122 <br/>Tel./fax: +381(0)18/209-122<br/>email: bata@advokatbata.co.rs <br/>www.advokatbata.co.rs</h6>
+	
+    </div>
+		
+	</div>
+ <div class="content-secondary">
+ <ul data-role="listview" data-inset="true" data-theme=c data-dividertheme=b>
+				<li data-role="list-divider">Organizacija</li>
+				<li><a href="dodela.html" data-rel="external">DODELA PREDMETA</a></li>
+				<li><a href="radnici/zaposljeni1.html" rel="external">PRETRAŽIVANJE (KO DUŽI, DODELJEN)</a></li>
+				<li><a href=#dnevniizvestaj>DNEVNI IZVEŠTAJ</a></li>
+				<li><a href="pret.html" rel="external">PRETRAŽIVANJE</a></li>
+				<li><a href="nalozi/ZAG.html" rel="external">lista po ZAG, <br /> pretrazivanje</a></li>
+				<li><a href="nalozi/nalozi.html" rel="external">NALOZI</a></li>
+				<li><a href="nalozi/novinalog.html" rel="external">TABELA NALOGA</a></li>
+				<li> <div class=ui-bar-e><a href="zuto/formazuto4.html" id=formazuto data-transition="turn" data-role=button rel="external"> forma  </a>
+		</li>
+		<li> <div class=ui-bar-b> <a href="plavo/formaplavo4.html" id=formaplavo data-transition="slidedown" data-role=button rel="external"> forma osiguranje </a>
+	</div></li>
+		<li> <div class=ui-bar-c>
+	  <a href="belo/formabelo4.html" id=formabelo data-transition="flow" data-role=button rel="external"> forma spor </a>
+	</div></li>
+					<!-- menu position helper -->
+		 
+			</ul>
+			 
+    </div>
+    <!-- /content -->
+	<div class="content-primary">
+			<nav>
+
+
+				<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+					<li data-role="list-divider">TROŠKOVNIK</li>
+					<li><a href="zuto/listzuto.html" rel="external">KRIVIČNI</a></li>
+					<li><a href="belo/listbelo.html" rel="external">PARNIČNI</a></li>
+					<li><a href="x.html">VANPARNIČNI</a></li>
+					<li><a href="plavo/listplavo.html" rel="external">PRORAČUN OSIGURANJA</a></li>
+					<li><a href="nalozi/svi1.html" rel="external">SVI SPOROVI</a></li>
+					<li><a href="nalozi/nereseno/nereseno.html" rel="external">NEREŠENI SPOROVI</a></li>
+
+					<li data-role="list-divider"><br />
+ <h1></li>
+					<li><a href="rashodi/rashodi.html" rel="external">RASHODI</a></li>
+					<li><a href="rashodi/rashodiproracun.html" data-rel="external">KANCELARIJE</a></li>
+					<li><a href="radnici/zaposljeni1.html" data-rel="external" data-transition="slidefade">RADNICI</a></li>
+					<li><a href="nalozi/nereseno/nereseno.html" rel="external">PRETRAŽIVANJE</a></li>
+					<li><a href="nalozi/reseno/reseno.html" rel="external">PRETRAŽIVANJE</a></li>
+					<li><a href="nalozi/nalozi.html" rel="external">PRETRAŽIVANJE</a></li>
+
+
+				</ul>
+			</nav>
+		
+
+    
+	</div>
+  </div>   <!-- /page -->
+  <div data-role="footer">
+      <div data-role="controlgroup" data-type="horizontal">
+      <h1><a href=http://www.advokatbata.co.rs/ id=bata data-role=button> Advokatska kancelarija STOJANOVIĆ </a></h1>
+	 
+      </div>
+
+    </div> <!-- /footer --> 
+  </div>
+	<div data-role=page id=dnevniizvestaj data-add-back-btn=true>
+  <div data-role=header>
+    <h1>dnevni izvestaj</h1>
+  </div>
+<div role="main" class="ui-content"  data-content-theme=b>
+    <p> izvestaj </p>  
+	<a href="page-transitions-page.html" data-transition="flip" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="turn" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="flow" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidefade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="none" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+  </div>
+</div>
+</body>
+</html>

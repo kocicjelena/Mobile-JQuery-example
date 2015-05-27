@@ -1,0 +1,13 @@
+var form = $("#myform");
+console.log( form.clearForm ); // undefined
+ 
+// jQuery.fn == jQuery.prototype
+jQuery.fn.clearForm = function() {
+  return this.find( ":input" ).each(function() {
+    this.value = "";
+  }).end();
+};
+// works for all instances of jQuery objects, because
+// the new method was added to the prototype
+console.log( form.clearForm ); // function
+form.clearForm();

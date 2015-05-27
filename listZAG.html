@@ -1,0 +1,94 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta name=viewport content="user-scalable=no,width=device-width" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+  <script src="js/nalozi.js"></script>
+  <script src="js/js.js"></script>
+  <script>
+$(document).on('pagebeforechange', function() {
+$.ajax({
+    type: "GET",
+    url: "http://localhost:8070/5/nalozi.xml",
+    dataType: "xml",
+    success: xmlParser7
+   });
+});
+
+function xmlParser7(xml) {
+$(xml).find("nalozi").each(function () {
+ $(".radnal").append('<div class="nalozi"><div class="zaduzen">' + $(this).find("adv1").text() +   '</div></div>');
+ $(this).find("zaduzen").find('adv1').each(function(){
+   $("#select-native-7").append('<option class="adv1">' + $(this).find("zag").text() + '</option>');});
+	  $(this).find("zaduzen").find('adv2').each(function(){
+	 $("#select-native-7").append('<option class="adv2">' + $(this).find("zag").text() + '</option>');});
+ });}
+ </script>
+<script>
+
+$("#zaghomenekoristim").bind ("pagecreate", function ()
+{
+  $("#zagidnekoristim").listview ("refresh");
+});
+
+</script>
+<script>
+$(document).on('click', '#proba', function(){ 
+	var stam = document.querySelector("#test7").innerHTML;
+
+    var dirName = $.mobile.path.get( $( this ).attr( "#prob" ) );
+	
+	var dodelodgbr = document.querySelector("#vezabr").innerHTML;
+    $( "#myResultproba" ).text( String( dirName ) );	
+        document.querySelector("#zagmesto").innerHTML = stam;
+		$("#zagbtn").click(function(){
+        $("#testzag").val(stam);
+  });
+   });
+</script>
+</head> 
+
+<body> 
+
+<div data-role=page id=zaghome>
+  <div data-role=header>
+    <a href="./index.html" data-icon="BACK" data-iconpos="notext" rel="external">NAZAD</a>
+	
+	 <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	
+    <h1>ZAG</h1>
+  </div>
+
+  <div data-role=content>
+    <ol>
+       <li id="zagid"></li>
+	   <li id="zagid2"></li>
+    </ol>
+	 <div class="ui-block-a"> <div class="ui-body ui-body-b">
+		<p>BROJ </p>
+		<form>
+<div class="ui-field-contain">
+    <label for="select-native-7"></label>
+    <select name="select-native-7" id="select-native-7">
+    </select>
+</div>
+</form>
+	<div id="statuszag"></div>
+	<button id="btn7">selektovan zag</button> 
+ <input type="text" id="test7" name="test7" placeholder="" style="width: 13.2em; height: 3.2em; float: left;" />
+ 
+ <button id="proba">selektovan </button> 
+	<button id="zagbtn">selektovan </button> 
+	 <input type="text" id="testzag" name="testzag" placeholder="" style="width: 13.2em; height: 3.2em; float: left;" />
+
+ </div>
+</div>
+	
+  </div>
+</div>
+
+</body>
+</html>

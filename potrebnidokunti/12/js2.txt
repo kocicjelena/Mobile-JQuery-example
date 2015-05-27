@@ -1,0 +1,30 @@
+var postParams ={ip:'115.113.211.130'};
+$.post("jsonpost.php",postParams,
+function(data, textStatus, jqXHR)
+{
+	$("#post-json-msg").html("");
+	 $.each(data, function(k, v) 
+	 {
+		$("#post-json-msg").append(k+":"+v+"<br>");	
+	});	
+
+},"json").fail(function(jqXHR, textStatus, errorThrown) 
+	{
+		alert(textStatus);
+	});
+	var getParams={  };
+$.getJSON("http://ip-api.com/json/",getParams,
+function(data, textStatus, jqXHR)
+{
+	 $.each(data, function(k, v) 
+	 {
+		$("#get-json-msg").append(k+":"+v+"<br>");	
+	});
+}).fail(function(jqXHR, textStatus, errorThrown) 
+{
+
+});
+var obj = $.parseJSON('{"name":"hayageek","age":32,"marks":[80,70,60,50,60,80]}')
+	obj.name;
+	obj.age;
+	obj.marks;

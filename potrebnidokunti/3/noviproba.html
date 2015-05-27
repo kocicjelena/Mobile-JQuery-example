@@ -1,0 +1,307 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta name=viewport content="user-scalable=no,width=device-width" />
+  <meta name="" content="yes" />
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+   <script src="js/novinovi.js"></script>
+   <script>
+$(document).ready(function() {
+ 
+   $( ".myButton" ).on( "click", function() {
+ 
+      var dirName = $.mobile.path.get( $( this ).attr( "value" ) );
+ 
+    $( "#myResult" ).html( String( dirName ) );
+ })
+});
+$(function(){
+    $("input[type='button']").click(function(){
+        $("input[type='text']").each(function(){
+           var $this = $(this);
+            if ($this.val() == "x"){
+               $this.remove();
+            }                
+        });
+    });        
+});
+$(function(){
+ $("#btn1").click(function(){
+    $("p").append(" <b>Appended text</b>.");
+  });});
+</script>
+</head> 
+
+<body> 
+
+<div data-role=page id=home>
+  <div data-role=header>
+     <a HREF="../index.html" data-icon="back" data-iconpos="notext" data-role=button rel="external">NAZAD</a>
+   
+	 <a href="../nav.html" data-icon="search" data-iconpos="notext" data-transition="fade">Search</a>
+	
+    <h1>RASHODI NIŠ</h1>
+  </div>
+
+  <div data-role=content>
+  <table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="ui-responsive table-stroke">
+  <thead>
+    <tr>
+      <th data-priority="2"></th>
+      <th></th>
+      <th data-priority="3"></th>
+      <th data-priority="1"><abbr title=""></abbr></th>
+      <th data-priority="5"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>NIS
+      <th></th>
+      <td><a href="" data-rel="external"></a></td>
+      <td>januar</td>
+      <td>februar</td>
+      <td>mart</td>
+	  <td>april</td>
+	  <td>maj</td>
+	  <td>jun</td>
+	  <td>jul</td>
+	  <td>avgust</td>
+	  <td>septembar</td>
+	  <td>oktobar</td>
+	  <td>novembar</td>
+	  <td>decembar</td>
+    </tr>
+    <tr>
+      <th>struja</th>
+      <td><a href="" data-rel="external"/></a></td>
+      <td><input type="button" id="dodaj" data-role="button" data-icon="refresh" data-theme="b" data-inline="true" value="dodaj"></td>
+      <td> <input type="text" value="x" /><input type="button" value="Remove x inputs" /></td>
+      <td></td>
+	  <td> <input type="button" value="#foo" id="button9" class="myButton" data-inline="true" /><div id="myResult">The result will be displayed here</div></td>
+	  <td><p>This is a paragraph.</p><button id="btn1">Append text</button></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+    <tr>
+      <th>voda</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+    <tr>
+      <th>grejanje</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+    <tr>
+      <th>fiksni telefon</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>mobilni telefon</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>internet</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>zakup objekta</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>higijeničarka</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>video nadzor</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>invest.održavanje</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>kancelarijski materijal</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>štampači, toneri</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>putni troškovi</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+	<tr>
+      <th>gorivo za kola</th>
+      <td><a href="" data-rel="external"></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+    </tr>
+  </tbody>
+</table>
+<input type="button" id="add_and_refresh" data-role="button" data-icon="refresh" data-theme="c" data-inline="true" value="dodaj rashod">
+  </div>
+</div>
+
+</body>
+</html>

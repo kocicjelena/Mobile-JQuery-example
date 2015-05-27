@@ -1,0 +1,65 @@
+<html>
+<head><title>jQuery Mobile Test</title>
+  <link rel="stylesheet" href="//code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+  <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="//code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+<script>
+$(document).bind('mobileinit', function() {
+    alert('mobileinit');
+});
+
+$(function() {
+    var selector = ':jqmData(role=page)';
+    $('body').on('pageinit', selector, function(e, data) {
+        // initialize page
+        var $page = $(this);
+        alert('init ' + $page.attr('id'));
+    }).on('pageshow', selector, function(e, data) {
+        // showpage
+        var $page = $(this);
+        alert('show ' + $page.attr('id'));
+    });
+    $('#page1').on('pageinit', function(e, data) {
+        // setup handler
+        var $page = $(this);
+        $page.find('.colorchanger').click(function() {
+            var $content = $page.find('.ui-content'),
+                isBodyC = $content.hasClass('ui-body-c');
+            $content.toggleClass('ui-body-c', !isBodyC).toggleClass('ui-body-e', isBodyC);
+        });
+
+    });
+});
+// have to manually write script tag since jsFiddle loads external 
+// scripts before our code and we need to bind to mobilinit before
+// jquery.mobile is loaded
+document.write('<scr' + 'ipt type="text/javascript" src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"></sc' + 'ript>');</script>
+</head>
+<body>
+    <div id="page1" data-role="page">
+        <div data-role="header">
+            <h1>Page 1</h1>
+        </div>
+        <div data-role="content" data-theme="c">
+            Place content here
+            <a href="#page2" data-role="button">Go to page 2</a>
+            <a href="#" class="colorchanger" data-role="button">Change color</a>
+        </div>
+        <div data-role="footer">
+            <h1>Footer</h1>
+        </div>
+    </div>
+    <div id="page2" data-role="page" data-add-back-btn="true">
+        <div data-role="header">
+            <h1>Page 2</h1>
+        </div>
+        <div data-role="content">
+            Place content here
+        </div>
+        <div data-role="footer">
+            <h1>Footer</h1>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <title>jQuery Mobile bug report</title>
+    
+    <link rel="stylesheet"  href="http://code.jquery.com/mobile/latest/jquery.mobile.min.css" />
+    
+  
+     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+            <script type="text/javascript">
+          $('div:jqmData(role="page")').live('pagebeforeshow', function() {
+    alert("live() to page - pagebeforeshow");
+});
+         
+  $('#about').live('pagebeforeshow', function() {
+    alert("live() to id - pagebeforeshow");
+});
+
+// using on() for first page does not work
+$(function() {
+    $("#about").on("pagebeforecreate", function() {
+        alert("DOESN'T FIRE on() pagebeforecreate");
+    });
+});
+$(function() {
+    $("#about").on("pageshow", function() {
+        alert("DOESN'T FIRE on() pageshow");
+    });
+});
+$(function() {
+    $("#about").on("pagebeforeshow", function() {
+        alert("DOESN'T FIRE on() pagebeforeshow");
+    });
+});
+
+          
+// using on() for second page works
+$(function() {
+    $("#foo").on("pagebeforecreate", function() {
+        alert("pagebeforecreate");
+    });
+});
+$(function() {
+    $("#foo").on("pageshow", function() {
+        alert("pageshow");
+    });
+});
+$(function() {
+    $("#foo").on("pagebeforeshow", function() {
+        alert("pagebeforeshow");
+    });
+});
+      </script>
+      <script type="text/javascript" src="http://code.jquery.com/mobile/latest/jquery.mobile.min.js"></script>
+      
+ 
+  </head>
+  <body>
+    <div id="about" data-role="page">
+        <div data-role="header">
+            <h1>header</h1>            
+        </div>
+       <a href="#foo">Program 1</a>       
+    </div>
+
+    <div id="foo" data-role="page">
+      Foo should be alerted
+    </div>
+    
+
+  </body>
+</html>

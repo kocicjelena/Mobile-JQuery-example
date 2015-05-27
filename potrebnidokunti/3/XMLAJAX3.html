@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>responsive, ajax img, swipe</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+	<script src="js/responsiveimgs.js"></script>
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if lt IE 9]>
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<link href="css/media-queries.css" rel="stylesheet" type="text/css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function () {
+$.ajax({
+    type: "GET",
+    url: "http://localhost:8070/bata/4/books.xml",
+    dataType: "xml",
+    success: xmlParser
+   });
+});
+
+function xmlParser(xml) {
+
+
+$(xml).find("Book").each(function () {
+ $(".main").append('<div class="book"><div class="title">' + $(this).find("one").text() +   '</div><div class="tw">' + $(this).find("tw").text() + '</div><div class="date">Published ' + $(this).find("t").text() + '</div></div>');
+ 
+   $("#images").append('<img src="' + $(this).find("one").text() + '" />');
+	 $("#images2").append('<img src="' + $(this).find("tw").text() + '" />');
+	  $("#images3").append('<img src="' + $(this).find("t").text() + '" />');
+
+
+ });
+
+}
+</script>
+<script>
+$('.has-sub').click( function(e) {
+    e.preventDefault();
+    $(this).parent().toggleClass('tap');
+});
+</script>
+</head>
+
+<body>
+<div id="wrapper">
+<header>
+
+
+	</header>
+	<ul class="egmenu">
+  <li><a href="#">Home</a></li>
+  <li>
+    <a href="#" class="has-sub">Products</a>
+    <ul>
+      <li><a href="#">Computers</a></li>
+      <li><a href="#">Phones</a></li>
+      <li><a href="#">Tablets</a></li>
+      <li><a href="#">Beepers</a></li>
+    </ul>
+  </li>
+  <li><a href="#">About</a></li>
+  <li><a href="#">Contact</a></li>
+</ul>
+<div class="main"></div>
+
+
+<!-- <header>
+	<strong>header:</strong>  Et semper urna urna non at cursus dolor vestibulum neque enim. Tellus interdum at laoreet laoreet lacinia lacinia sed Quisque justo quis. Hendrerit scelerisque lorem elit orci tempor tincidunt enim Phasellus dignissim tincidunt. Nunc vel et Sed nisl Vestibulum odio montes Aliquam volutpat pellentesque. Ut pede sagittis et quis nunc gravida porttitor ligula.
+<ul><li>asf</li><li>asf</li><li>asf</li><li>asf</li><li>asf</li></ul>
+	
+	</header>-->
+
+
+
+	<div class="module">
+  <h2 class="stripe-2">
+  </br>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit.  </br> 
+  Perferendis hic sapiente asperiores minus animi nam temporibus 
+   </br> cumque magnam doloribus vitae voluptatum cupiditate nostrum omnis vero adipisci recusandae maxime quo labore.
+ </br>   D </br> </br> </br> </br></br></h2>
+ <div id="parent"><p style="float:right;">  <a href="http://player.vimeo.com/video/39683393?api=1&amp;player_id=player_1" onclick="javascript:void window.open('http://player.vimeo.com/video/39683393?api=1&amp;player_id=player_1','1400161055165','width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');return false;" style="color:white;"> > </a></p></div>
+  <p></br> </p><div id="parent2"><a href="http://player.vimeo.com/video/39683393?api=1&amp;player_id=player_1" onclick="javascript:void window.open('http://player.vimeo.com/video/39683393?api=1&amp;player_id=player_1','1400161055165','width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');return false;"><div class="inline" id="images"></div></a>
+<div class="inline" id="images2"></div><div class="inline" id="images3"></div></div></br>
+ 
+
+
+ <!-- <img src="https://www.dropbox.com/s/gslaewzbnv6o9jy/most.JPG" id="load" width="16" height="11"   align="absmiddle"/>-->
+
+<div class="footer"><footer>
+	 <div class="leftColumn">
+        
+      Mus elit Morbi mus enim lacus at quis </div>
+	  <div class="rightColumn">Nam eget morbi.Mus elit Morbi mus enim lacus at quis Nam eget morbi.Mus elit Morbi mus enim lacus at quis Nam eget morbi.Mus elit Morbi mus enim lacus at quis Nam eget morbi.Mus elit Morbi mus enim lacus at quis Nam eget morbi.Mus elit Morbi mus enim lacus at quis Nam eget morbi.Mus elit Morbi mus enim lacus at quis Nam eget morbi.
+      </div>
+	  <!-- <img src="https://www.dropbox.com/s/7smitaja8p7b9ei/dev.JPG" />-->
+</footer></div></div>
+	</div>
+</body>
+</html>

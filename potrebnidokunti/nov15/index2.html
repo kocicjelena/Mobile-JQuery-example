@@ -1,0 +1,48 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="angular.min.js"></script>
+    <script src="script2.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+  </head>
+  <body>
+
+
+    <div ng-controller="Controller">
+      <form novalidate class="simple-form">
+        Name: <input type="text" ng-model="user.name" /><br />
+        E-mail: <input type="email" ng-model="user.email" /><br />
+        Gender: <input type="radio" ng-model="user.gender" value="male" />male
+        <input type="radio" ng-model="user.gender" value="female" />female<br />
+        <button ng-click="reset()">RESET</button>
+        <button ng-click="update(user)">SAVE</button>
+      </form>
+      <pre>form = {{user | json}}</pre>
+      <div id="master">master = {{master | json}}</div>
+	  <button id="myform">m</button>
+	  <pre>master = {{master.name}}</pre>
+    
+	<button ng-click='sayHello()'>greet</button>
+	 <hr>
+	{{greeting}}
+	<script>
+	var JSONObject= {
+"name":"",
+"street":"", 
+"age":,
+"phone":""};
+document.getElementById("jname").innerHTML=JSONObject.name 
+document.getElementById("jage").innerHTML=JSONObject.age 
+document.getElementById("jstreet").innerHTML=JSONObject.street 
+document.getElementById("jphone").innerHTML=JSONObject.phone 
+</script>
+<p>
+Name: <span id="jname"></span><br /> 
+Age: <span id="jage"></span><br /> 
+Address: <span id="jstreet"></span><br /> 
+Phone: <span id="jphone"></span><br /> 
+</p>
+	</div>
+  </body>
+</html>

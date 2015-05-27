@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title></title>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+  $(document).on('change', '#select-native-2', function(){   
+    var dirName = $.mobile.path.get( $( this ).attr( "#select-native-2" ) );
+	var selektovano2 = $(this).find("option:selected").text();
+    $( "#myResult2" ).text( String( dirName ) );	
+        document.querySelector("#status2").innerHTML = selektovano2;
+		$("#btn32").click(function(){
+        $("#test32").val(selektovano2);
+  });
+   });
+    $(document).on('change', '#select-native-3', function(){   
+    var dirName = $.mobile.path.get( $( this ).attr( "#select-native-3" ) );
+	var selektovano3 = $(this).find("option:selected").text();
+    $( "#myResult3" ).text( String( dirName ) );	
+        document.querySelector("#status3").innerHTML = selektovano3;
+		$("#btn33").click(function(){
+        $("#test33").val(selektovano3);
+  });
+  $("#btnpbr").click(function(){
+  var selektovano333 = document.querySelector("#selektovano3").innerHTM;
+        $(".testpbr").val(selektovano333);
+  });
+   });
+    $(document).on('change', '#select-native-4', function(){   
+    var dirName = $.mobile.path.get( $( this ).attr( "#select-native-4" ) );
+	var selektovanoadvsele = $(this).find("option:selected").text();
+    $( "#myResultadvsele" ).text( String( dirName ) );	
+        document.querySelector("#statusadvsele").innerHTML = selektovanoadvsele;
+		$("#btnadvsele").click(function(){
+        $("#testadvsele").val(selektovanoadvsele);
+  });
+   });
+</script>
+  <!-- This shim will let your indexedDB code run in Safari and Opera as well! The nice & sweet thing is that you are now ready (with the same code) to built a mobile web app that will work both on iOS, Android and other OS that got Opera 
+  
+  <script src="http://axemclion.github.com/IndexedDBShim/dist/IndexedDBShim.min.js"></script>
+-->
+<script>
+$(document).on('pagebeforechange', function() {
+$.ajax({
+    type: "GET",
+    url: "http://localhost:8070/5/radnici/radnici.xml",
+    dataType: "xml",
+    success: xmlParser2
+   });
+});
+
+function xmlParser2(xml) {
+
+
+$(xml).find("radnici").each(function () {
+ $(".rad").append('<div class="radnici"><div class="adv1">' + $(this).find("ime").text() +   '</div></div>');
+
+ });
+}
+</script>
+<script>
+$(document).on('pageinit', function() {
+$.ajax({
+    type: "GET",
+    url: "http://localhost:8070/5/nalozi.xml",
+    dataType: "xml",
+    success: xmlParserzaposljeni
+   });
+});
+ $(document).on('pageafterchange', function() {
+$.ajax({
+    type: "GET",
+    url: "http://localhost:8070/5/nalozi.xml",
+    dataType: "xml",
+    success: xmlParserzaposljeni2
+   });
+});
+function xmlParserzaposljeni(xml) {
+$(xml).find("nalozi").each(function () {
+ $(".radnal").append('<div class="nalozi"><div class="zaduzen">' + $(this).find("adv1").text() +   '</div></div>');
+  
+  
+  $(this).find("zaduzen").find('adv1').each(function(){
+  $("#select-native-3").append('<option>' + $(this).find("bpo").text() + '</option>');
+   $("#select-native-4").append('<option class="adv1">' + $(this).find("pbr").text() + '</option>');
+	 $("#select-native-2").append('<option class="adv1">' + $(this).find("zag").text() + '</option>');
+	 var zag = $(this).find('zag').text();
+	 var myzag = document.querySelector("#test32").innerHTML;
+	 var id = $(this).attr('id');
+	 var pbr = $(this).find('pbr').text();
+	 var mypbr = document.querySelector("#testadvsele").innerHTML;
+
+ $(".linkzaduzen").append('<div class="zaduzen"><div class="url">' + $(this).find("url").text() +   '</div>');
+ var url = $(this).find('url').text();
+$('<div class="items" id="link_'+id+'"></div>').html('<a href="'+url+'">'+id+'</a>').appendTo('#listazaduzen');
+if (pbr === mypbr){$("#mypbr").append('<li>' + $(this).find("osiguranje").text() +   '</li>');};
+	});
+	  $(this).find("zaduzen").find('adv2').each(function(){
+	  $("#select-native-2").append('<option>' + $(this).find("zag").text() + '</option>');
+ $("#select-native-4").append('<option>' + $(this).find("pbr").text() + '</option>');
+	 $("#select-native-3").append('<option>' + $(this).find("bpo").text() + '</option>');
+var zag = $(this).find('zag').text();
+var id = $(this).attr('id');
+ $(".linkzaduzen").append('<div class="zaduzen"><div class="url">' + $(this).find("url").text() +   '</div>');
+ var url = $(this).find('url').text();
+$('<div class="items" id="link_'+id+'"></div>').html('<a href="'+url+'">'+id+'</a>').appendTo('#listazaduzen');
+
+ });});}
+function xmlParserzaposljeni2(xml) {
+$(xml).find("nalozi").each(function () {
+ $(".radnal").append('<div class="nalozi"><div class="zaduzen">' + $(this).find("adv1").text() +   '</div></div>');
+  
+  
+  $(this).find("zaduzen").find('adv1').each(function(){
+  $("#select-native-3").append('<option>' + $(this).find("bpo").text() + '</option>');
+   $("#select-native-4").append('<option class="adv1">' + $(this).find("pbr").text() + '</option>');
+	 $("#select-native-2").append('<option class="adv1">' + $(this).find("zag").text() + '</option>');
+	 var zag = $(this).find('zag').text();
+	 var myzag = document.querySelector("#test32").innerHTML;
+	 var id = $(this).attr('id');
+	 var pbr = $(this).find('pbr').text();
+	 var mypbr = document.querySelector("#testadvsele").innerHTML;
+	
+ var url = $(this).find('url').text();
+$('<div class="items" id="link_'+id+'"></div>').html('<a href="'+url+'">'+id+'</a>').appendTo('#listazaduzen');
+if (pbr === mypbr){$(".linkzaduzen").append('<div class="zaduzen"><div class="url">' + $(this).find("url").text() +   '</div>');};
+	});
+	  $(this).find("zaduzen").find('adv2').each(function(){
+	  $("#select-native-2").append('<option>' + $(this).find("zag").text() + '</option>');
+ $("#select-native-4").append('<option>' + $(this).find("pbr").text() + '</option>');
+	 $("#select-native-3").append('<option>' + $(this).find("bpo").text() + '</option>');
+var zag = $(this).find('zag').text();
+var id = $(this).attr('id');
+ $(".linkzaduzen").append('<div class="zaduzen"><div class="url">' + $(this).find("url").text() +   '</div>');
+ var url = $(this).find('url').text();
+$('<div class="items" id="link_'+id+'"></div>').html('<a href="'+url+'">'+id+'</a>').appendTo('#listazaduzen');
+
+ });});
+var myzag = document.querySelector("#test32").innerHTML;
+$("#btnzag").click(function(){
+ $(this).find("zaduzen").find('adv1').each(function(){
+	if (zag === myzag){$("#myzag").append('<li>' + $(this).find("osiguranje").text() +   '</li>');};
+	});
+ $(this).find("zaduzen").find('adv2').each(function(){
+	if (zag === myzag){$("#myzag").append('<li>' + $(this).find("osiguranje").text() +   '</li>');};
+	});
+	});}
+</script>
+<script>
+$('.has-sub').click( function(e) {
+    e.preventDefault();
+    $(this).parent().toggleClass('tap');
+});}
+</script>
+<style>
+  /* Basic styles */
+.rwd-example .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example .ui-block-a,
+.rwd-example .ui-block-b,
+.rwd-example .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example .ui-block-a,
+    .rwd-example .ui-block-c {
+      float: left;
+      width: 14.925%;
+    }
+    .rwd-example .ui-block-a p,
+    .rwd-example .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example .ui-block-b{
+      float: left;
+      width: 70.15%;
+    }
+    .rwd-example .ui-block-a,
+    .rwd-example .ui-block-c {
+      float: left;
+      width: 14.925%;
+    }
+    .rwd-example > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example .ui-block-b {
+      float: left;
+      width: 70.15%;
+    }
+    .rwd-example .ui-block-a {
+      float: left;
+      width: 14.925%;
+    }
+    .rwd-example .ui-block-c {
+      float: left;
+      width: 14.925%;
+    }
+}
+  /* Basic styles */
+.rwd-example2 .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example2 p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example2 .ui-block-a,
+.rwd-example2 .ui-block-b,
+.rwd-example2 .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example2 > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example2 {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example2 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example2 .ui-block-b,
+	.rwd-example2 .ui-block-c {
+      float: left;
+      width: 37.53%;
+    }
+    .rwd-example2 .ui-block-a p,
+    .rwd-example2 .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example2 > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example2 > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example2 > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example2 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example .ui-block-b,
+    .rwd-example2 .ui-block-c {
+      float: left;
+      width: 37.53%;
+    }
+    .rwd-example2 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example2 > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example2 > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example2 .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example2 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+	.rwd-example2 .ui-block-b,
+    .rwd-example2 .ui-block-c {
+      float: left;
+      width: 37.53%;
+    }
+	 h6 {
+      float: right;
+      width: 20em;
+    }
+}
+  /* Basic styles */
+.rwd-example3 .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example3 p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example3 .ui-block-a,
+.rwd-example3 .ui-block-b,
+.rwd-example3 .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example3 > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example3 {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example3 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example3 .ui-block-b,
+	.rwd-example3 .ui-block-c {
+      float: left;
+      width: 49.95%;
+    }
+    .rwd-example3 .ui-block-a p,
+    .rwd-example3 .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example3 > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example3 > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example3 > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example3 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example3 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example3 .ui-block-c {
+      float: left;
+      width: 49.95%;
+    }
+    .rwd-example3 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example3 > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example3 > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example3 .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example3 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+	.rwd-example3 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example3 .ui-block-c {
+      float: left;
+      width: 49.95%;
+    }
+}
+.ui-icon-myicon:after {
+    background-image: url("img/img.jpg");
+    /* Make your icon fit */
+    background-size: 18px 18px;
+}
+  /* Basic styles */
+.rwd-example4 .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example4 p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example4 .ui-block-a,
+.rwd-example4 .ui-block-b,
+.rwd-example4 .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example4 > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example4 {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example4 .ui-body {
+       min-height: 5em;
+    }
+	.rwd-example4 .ui-block-a {
+      float: left;
+      width: 75.075%;
+    }
+	.rwd-example4 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example4 .ui-block-a p,
+    .rwd-example4 .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example4 > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example4 > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example4 > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example4 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example4 .ui-block-a {
+      float: left;
+      width: 75.075%;
+    }
+    .rwd-example4 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example4 > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example4 > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example4 .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example4 .ui-block-a {
+      float: left;
+      width: 75.075%;
+    }
+	.rwd-example4 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+}
+  /* Basic styles */
+.rwd-example5 .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example5 p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example5 .ui-block-a,
+.rwd-example5 .ui-block-b,
+.rwd-example5 .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example5 > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example5 {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example5 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example5 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+	.rwd-example5 .ui-block-a {
+      float: left;
+      width: 37.5375%;
+    }
+	.rwd-example5 .ui-block-c {
+      float: left;
+      width: 37.5375%;
+    }
+    .rwd-example5 .ui-block-a p,
+    .rwd-example5 .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example5 > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example5 > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example5 > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example5 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example5 .ui-block-a {
+      float: left;
+      width: 37.5375%;
+    }
+    .rwd-example5 .ui-block-c {
+      float: left;
+      width: 37.5375%;
+    }
+    .rwd-example5 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example5 > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example5 > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example5 .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example5 .ui-block-a {
+      float: left;
+      width: 37.5375%;
+    }
+	.rwd-example5 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example5 .ui-block-c {
+      float: left;
+      width: 37.5375%;
+    }
+}
+</style>
+
+</head>
+<body>
+  <div data-role="page" data-content-theme="b">
+
+    <div data-role="header">
+      <h1></h1>
+	  <a href="../INDEX.HTML" data-icon="BACK" data-iconpos="notext" data-direction="reverse" rel="external">NAZAD</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	
+
+    </div>
+    <!-- /header -->
+
+   <div role="main" class="ui-content">
+-----
+<p>INTERNO SELEKTOVANJE</p>
+		<form>
+<div class="ui-field-contain">
+    <label for="select-native-2"></label>
+    <select name="select-native-2" id="select-native-2">
+    </select>
+</div>
+</form>
+<div id="status2"></div>
+	<button id="btn32"></button> 
+ <input type="text" id="test32" name="test32" placeholder="" style="width: 13.2em; height: 3.2em; float: left;" />
+<div class="linkzaduzen"></div>
+ <!--<div id="listazaduzen"></div>-->
+-----
+<p>INTERNO SELEKTOVANJE</p>
+		<form>
+<div class="ui-field-contain">
+    <label for="select-native-4"></label>
+    <select name="select-native-4" id="select-native-4">
+    </select>
+</div>
+</form>
+		<div id="statusadvsele">S</div>
+	<button id="btnadvsele">B</button> 
+ <input type="text" id="testadvsele" name="testadvsele" placeholder="" style="width: 13.2em; height: 3.2em; float: left;" />
+<div id="myResultadvsele">R</div>
+<div id="mypbr"></div>
+----
+<div class="inline" id="adv1">adv1</div><div class="inline" id="adv2">adv2</div></br>
+ myzag<div class="myzag"></div>
+  linkzaduzen<div class="linkzaduzen"></div>
+  okrivljen<div class="okrivljen"></div>
+  listazaduzenih<div id="listazaduzenih></div>
+  <div id="parent"></div>
+   <div class="rwd-example5">
+    <div class="ui-block-a"> <div class="ui-body ui-body-b">
+	<p>BROJ PREDMETA OSIGURANJA</p>
+		<form>
+<div class="ui-field-contain">
+    <label for="select-native-3"></label>
+    <select name="select-native-3" id="select-native-3">
+    </select>
+</div>
+</form>
+		<div id="status3">status</div>
+	<button id="btn33">selektovan pred.osiguranja</button> 
+ <input type="text" id="test33" name="test33" placeholder="" style="width: 13.2em; height: 3.2em; float: left;" />
+<br />
+<ul id="mypbr">mypbr</ul>
+	<button id="btnpbr">sele</button> 
+	 <input type="text" id="testpbr" name="testpbr" placeholder="" style="width: 13.2em; height: 3.2em; float: left;" />
+
+<br/>
+
+			</div>	<a href="../index.html" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-inline" data-rel="back"  data-role=button rel="external">nazad</a>
+		<br/>
+   </div>
+    <!-- secondary story block #1 -->
+   
+	</div>
+	<a href=#adv1 id="status" data-transition="slidedown" data-role=button> proracunplavo </a>
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer">
+      <div data-role="controlgroup" data-type="horizontal">
+        <a href="../" data-direction="reverse" data-role=button></a>
+		 <a href="#status3" id="status" data-transition="slidedown" data-role=button> Goto status </a>
+
+      </div>
+
+    </div> <!-- /footer --> 
+  </div>   <!-- /page -->
+<div data-role=page id=adv1>
+  <div data-role=header>
+    <h1>adv1</h1>
+  </div>
+  <div data-role=content>
+    <p>adv1 </p>  
+	<a href="page-transitions-page.html" data-transition="flip" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="turn" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="flow" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidefade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="none" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+  </div>
+</div>
+</body>
+</html>

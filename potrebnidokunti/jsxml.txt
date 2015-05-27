@@ -1,0 +1,68 @@
+<html>
+    <head><title>How to Load Content from XML File using AJAX</title></head>
+    <body>
+        <h1>How to Load Content from XML File using AJAX</h1>
+        <div id='update'>This is a div. This will be updated with Contents from xml file using AJAX.</div>
+        <script src="script.js"></script>
+    </body>
+</html>
+<cats>
+    <cat id='1'>
+        <name>George</name>
+        <gender>male</gender>
+        <color>white-mustard</color>
+        <age>5 years</age>
+    </cat>
+    <cat id='2'>
+        <name>Pety</name>
+        <gender>female</gender>
+        <color>white-black-mustard</color>
+        <age>3</age>
+    </cat>
+    <cat id='3'>
+        <name>Alex</name>
+        <gender>male</gender>
+        <color>white-grey-black</color>
+        <age>3</age>
+    </cat>
+    <cat id='4'>
+        <name>Rex</name>
+        <gender>male</gender>
+        <color>white-mustard</color>
+        <age>2</age>
+    </cat>
+</cats>
+
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+var xhr;
+if (window.XMLHttpRequest) xhr = new XMLHttpRequest();         // all browsers except IE
+else xhr = new ActiveXObject("Microsoft.XMLHTTP");         // for IE
+ 
+xhr.open('GET', 'data.xml', false);
+xhr.onreadystatechange = function () {
+    if (xhr.readyState===4 && xhr.status===200) {            
+        var items = xhr.responseXML.getElementsByTagName('name');
+        var output = '<ul>';
+        for (var i=0; i<items.length; i++) output += '<li>' + items[i].firstChild.nodeValue + '</li>';
+        output += '</ul>';
+ 
+        var div = document.getElementById('update');
+        div.innerHTML = output;
+    }
+}
+xhr.send();

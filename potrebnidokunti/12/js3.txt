@@ -1,0 +1,39 @@
+function fn1( value ) {
+  console.log( value );
+}
+ 
+function fn2( value ) {
+  console.log( "fn2 says: " + value );
+  return false;
+}
+var callbacks = $.Callbacks();
+callbacks.add( fn1 );
+ 
+// Outputs: foo!
+callbacks.fire( "foo!" );
+ 
+callbacks.add( fn2 );
+ 
+// Outputs: bar!, fn2 says: bar!
+callbacks.fire( "bar!" );
+ 
+callbacks.remove( fn2 );
+ 
+// Only outputs foobar, as fn2 has been removed.
+callbacks.fire( "foobar" );
+var callbacks = $.Callbacks( "memory" );
+callbacks.add( fn1 );
+callbacks.fire( "foo" );
+callbacks.add( fn2 );
+callbacks.fire( "bar" );
+callbacks.remove( fn2 );
+callbacks.fire( "foobar" );
+ 
+/*
+output:
+foo
+fn2 says:foo
+bar
+fn2 says:bar
+foobar
+*/

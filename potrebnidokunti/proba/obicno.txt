@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function loadXMLDoc()
+{
+var xmlhttp;
+var txt,x,i;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    xmlDoc=xmlhttp.responseXML;
+    txt="";
+    x=xmlDoc.getElementsByTagName("ARTIST");
+    for (i=0;i<x.length;i++)
+      {
+      txt=txt + x[i].childNodes[0].nodeValue + "<br>";
+      }
+    document.getElementById("myDiv").innerHTML=txt;
+    }
+  }
+xmlhttp.open("GET","cd_catalog.xml",true);
+xmlhttp.send();
+}
+</script>
+</head>
+
+<body>
+
+<h2>My CD Collection:</h2>
+<div id="myDiv"></div>
+<button type="button" onclick="loadXMLDoc()">Get my CD collection</button>
+ 
+</body>
+</html>
+function searchLocations()
+    {
+
+
+        var xmlhttp;
+        var x,xx,txt;
+        var search_text=document.getElementById("txtSearch").value;
+        if(search_text!="")
+        {
+        if(window.XMLHttpRequest)
+            xmlhttp=new XMLHttpRequest();
+        else
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            xmlhttp.onreadystatechange=function()
+            {
+             if(xmlhttp.readyState==1)
+                 document.getElementById("search_locations_result").innerHTML="<p align='center' ><img src='account/images/working.gif'></p>";
+
+             else if (xmlhttp.readyState==4 && xmlhttp.status==200)
+             {
+                document.getElementById("status").innerHTML="";
+                //document.getElementById("txtSearch").value="";
+                x=xmlhttp.responseXML.documentElement.getElementsByTagName("Result");   
+                txt="<table border='0' width='100%'>";
+                for (i=0;i<x.length;i++)
+                 {
+
+        txt=txt + "<div class=\"d"+id2+"\" style=\"display:none\">"+
+"<div id='adv' class='usual'> "+
+  "<ul>"+
+    "<li><a href='#t13'>Tab 1</a></li> "+
+    "<li><a href='#t23' class='selected'>Tab 2</a></li> "+
+   " <li><a href='#t33'>Tab 3</a></li> "+
+  "</ul> "+
+  "<div id='t13' style='display: none; '>This is tab 1.</div> "+
+  "<div id='t23' style='display: block; '>More content in tab 2.</div>" +
+ " <div id='t33' style='display: none; '>Tab 3 is always last!</div> "+
+"</div> "+
+
+        "</div>";
+
+        }// end for
+
+                document.getElementById("search_locations_result").innerHTML=txt;               
+             }
+            }
+        xmlhttp.open("GET","ajax_search_locations.php?name="+search_text+"&page="+page,true);
+        xmlhttp.send();
+        }
+        else
+            document.getElementById("status").innerHTML="";
+
+    }
+where div usual is that uses jquery like this :
+
+$(document).ready(function(){
+  $("div.usual ul").idTabs();
+  });
+pojednostavljenoL

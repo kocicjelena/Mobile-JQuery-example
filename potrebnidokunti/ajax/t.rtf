@@ -1,0 +1,282 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\f0\fs22{\field{\*\fldinst{HYPERLINK "http://www.toontuts.com/users-login-with-phonegap-and-jquery-mobile/"}}{\fldrslt{\ul\cf1 http://www.toontuts.com/users-login-with-phonegap-and-jquery-mobile/}}}\f0\fs22\par
+Applications PhoneGap , unlike an application web , have all your information stored on the user\rquote s computer and can not be connected directly to an external database. This does not mean that the information must be trapped in the phone. We have many technical applications to connect to any server and interact with any database.\par
+\par
+In this tutorial we will step through the process of validating a user in an application PhoneGap with jQuery Mobile.\par
+\par
+Based application code\par
+\par
+Let\rquote s start with a basic application that requires authentication, we use a jQuery Mobile based app.\par
+\par
+The code for this application has two screens, the first has a form and the second can only be validated after an external server.\par
+\par
+1\par
+2\par
+3\par
+4\par
+5\par
+6\par
+7\par
+8\par
+9\par
+10\par
+11\par
+12\par
+13\par
+14\par
+15\par
+16\par
+17\par
+18\par
+19\par
+20\par
+21\par
+22\par
+23\par
+24\par
+25\par
+26\par
+27\par
+28\par
+29\par
+30\par
+31\par
+32\par
+33\par
+34\par
+35\par
+36\par
+37\par
+38\par
+39\par
+40\par
+41\par
+42\par
+43\par
+44\par
+45\par
+46\par
+47\par
+48\par
+49\par
+50\par
+51\par
+52\par
+53\par
+54\par
+55\par
+56\par
+57\par
+58\par
+59\par
+60\par
+61\par
+62\par
+63\par
+64\par
+65\par
+<!DOCTYPE html>\par
+<html>\par
+<head>\par
+<meta charset="UTF-8">\par
+<title>Validation of users</title>\par
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />\par
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>\par
+<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>\par
+</head>\par
+  \par
+<body>\par
+  \par
+<div data-role="page" id="initiation">\par
+  \par
+<div data-role="header">\par
+<h1>User Authentication</h1>\par
+</div>\par
+<div data-role="content"> \par
+<form id="form" >\par
+<label> user </label>\par
+<input type="text" id="username" name="username">\par
+<label> Password </label>\par
+<input type="password" id="passwrd" name="passwrd" >\par
+  \par
+<input type="submit" value="Login" id="loginbutton">\par
+</form>   \par
+</div>\par
+</div>\par
+<div data-role="page" id="home">\par
+  \par
+<div data-role="header">\par
+<h1>Welcome</h1>\par
+</div>\par
+  \par
+<div data-role="content"> \par
+<h2> Welcome to the application </h2>\par
+<h3> Its user and password validation</h3>\par
+</div>\par
+  \par
+</div>\par
+  \par
+<script>\par
+  \par
+$('#form').submit(function() \{\par
+// Collects the values \u8203?\u8203?that the user insert\par
+var userdata = $("#username").val()\par
+var passwordData = $("#passwrd").val()\par
+var Validationfile = "{\field{\*\fldinst{HYPERLINK "https://toontuts/phonegap/validationForm/validationData.php?jsoncallback=?"}}{\fldrslt{\ul\cf1 https://toontuts/phonegap/validationForm/validationData.php?jsoncallback=?}}}\f0\fs22 "\par
+  \par
+$.getJSON( Validationfile, \{ user:userdata ,password:passwordData\})\par
+.done(function(ServerResponse) \{\par
+alert(ServerResponse.message + "\\nGenerated en: " + ServerResponse.minute + "\\n" +ServerResponse.generator)\par
+if(ServerResponse.validation == "ok")\{\par
+/// If the validation is successful, displays the "home" screen\par
+$.mobile.changePage("#home")\par
+\}else\{\par
+/// Execute a behavior when validation fails\par
+\}\par
+\})\par
+return false;\par
+\})\par
+</script>\par
+  \par
+</body>\par
+</html>\par
+Login Phonegap\par
+\par
+Gathering information\par
+\par
+To collect the information on the form you\rquote ll use JavaScript. The first step is to create a function that is activated when the user presses the button.\par
+\par
+1\par
+2\par
+3\par
+4\par
+<script>\par
+$(\lquote #form\rquote ).submit(function() \{return false;\par
+\})\par
+</script>\par
+In this function we add the statement return false to control the regular behavior of the form and avoid trying to open another document.\par
+\par
+Inside this function we just created, we will continue adding code, first add two variables that collect information from the text boxes.\par
+\par
+1\par
+2\par
+var userdata = $("#username").val()\par
+var passwordData = $("#passwrd").val()\par
+Now that we have available user information, we will send it to a file hosted on an external server, in this case the file \ldblquote validationData.php\rdblquote  that is hosted on this server.\par
+\par
+1\par
+var Validationfile = "{\field{\*\fldinst{HYPERLINK "https://toontuts/phonegap/validationForm/validationData.php?jsoncallback=?"}}{\fldrslt{\ul\cf1 https://toontuts/phonegap/validationForm/validationData.php?jsoncallback=?}}}\f0\fs22 "\par
+To send information to this file, use the command jQuery $getJSON. already includes all settings and format for sending information to the server:\par
+\par
+1\par
+$.getJSON( Validationfile, \{ user:userdata ,password:passwordData\})\par
+As parameters of this function we include the variable that defines the path of the file that receives data (Validationfile) and the data we collect the form.\par
+\par
+Information processing on the server\par
+\par
+To this point we have an application that can collect and send information to a server, the next step is to create the file that will process the information on the server (\ldblquote validationData.php\rdblquote ). Let\rquote s use PHP to be a simple and popular language, but the information we send the application can be read in any other programming language.\par
+\par
+In this case, to keep the simple example we define two variables with the correct username and password. When you make your actual application, these values \u8203?\u8203?may come from a database or some other internal server process.\par
+\par
+1\par
+2\par
+$validUser= "revolution";\par
+$validPassword = "mobile";\par
+From this point, our application test will give you access to any user who uses the \ldblquote revolution\rdblquote  and password \ldblquote mobile\ldblquote .\par
+\par
+Now we will extract the information sent from the application, is the name of the variables that were sent from the mobile application.\par
+\par
+1\par
+2\par
+$getUser = $_POST['user'];\par
+$getPassword = $_POST['password'];\par
+The mobile application has the ability to read any information you send to the server, the complexity of the data depends on the needs of each application. To demonstrate that we can send complex data, we will create an array with some extra data to send back to the application. In this case we will include the date and time that the process and the domain in which it was generated is performed.\par
+\par
+1\par
+2\par
+3\par
+$results  = array(), \par
+$results['hour'] = time (), \par
+$results["generator"] = "generated";\par
+The next step is to verify that the data sent from the application match those defined on the server. According to the result of this verification add different server responses for the user to know whether the authentication was successful or not.\par
+\par
+1\par
+2\par
+3\par
+4\par
+5\par
+6\par
+7\par
+if( $getUser == $validUser && $getPassword == $validPassword )\{\par
+$results['response'] = "Validation Right", \par
+$results['validation'] = "ok"; \par
+\}else \{ \par
+$results['response "] =" Wrong username and password ", \par
+$results['validation'] = "error";\par
+\}\par
+We have ready the verification results. We will convert the data contained in the array format JSON to send back to the application. This format is very popular in mobile applications because it is easy to read and takes up less bandwidth than similar formats such as XML.\par
+\par
+1\par
+2\par
+$resultJson = json_encode($results);\par
+echo $resultJson ;\par
+The application is ready to receive data, but you still need to learn an extra trick.\par
+\par
+Avoid safety restraint Javascript JSONP\par
+\par
+There is a security restriction called in javascript same origin policy , which only allows files to communicate with only javascript files that are in the same domain. Trying to read files between different domains displays a security error and blocks reading the external file.\par
+\par
+Although the way that applications run PhoneGap , this restriction does not apply, if you try to emulate your app in a browser you will encounter a error:\par
+\par
+1\par
+XMLHttpRequest cannot load {\field{\*\fldinst{HYPERLINK "https://toontuts/phonegap/validationForm/validationData.php?jsoncallback="}}{\fldrslt{\ul\cf1 https://toontuts/phonegap/validationForm/validationData.php?jsoncallback=}}}\f0\fs22 ?. Origin null is not allowed by Access-Control-Allow-Origin."\par
+To avoid this restriction should use the format JSONP ( JSON with Padding ) which allows access to content on external servers without generating errors in the browser. To use the JSONP format in this application we just have to make two minor changes. The first is to edit the javascript variable \ldblquote Validationfile\rdblquote  in this way:\par
+\par
+1\par
+var Validationfile = "{\field{\*\fldinst{HYPERLINK "https://toontuts/phonegap/validationForm/validationData.php?jsoncallback=?"}}{\fldrslt{\ul\cf1 https://toontuts/phonegap/validationForm/validationData.php?jsoncallback=?}}}\f0\fs22 "\par
+Note that the end of the URL is included \ldblquote ? jsoncallback =?\rdblquote  this text sends a callback or callback for javascript to read and process the response from the server without problems.\par
+\par
+The second step is to replace the last line of your PHP file to fit the correct format:\par
+\par
+1\par
+echo $_POST['jsoncallback'] . \lquote (\lquote  . $resultJson . \lquote );\rquote ;\par
+With these minimal changes your application does not only work on a mobile, you can also try it from your browser!\par
+\par
+Receive data in the app server\par
+\par
+Almost our application here, what remains will schedule the application behavior when receiving data back from the server.\par
+\par
+As mentioned earlier, the command $.getJSON includes everything you need to send and receive data from the server. We will add an extra method called \rdblquote  . done \rdblquote  that runs only when a valid response from the server, in this case we will use parameter is received \ldblquote ServerResponse\rdblquote in which data received from the server are automatically stored.\par
+\par
+1\par
+2\par
+3\par
+4\par
+5\par
+6\par
+7\par
+8\par
+$.getJSON(Validationfile, \{user: userdata, password: passwordData\}). \par
+. done (function(ServerResponse)\{ \par
+alert(ServerResponse.message + "\\nGenerated en: " + ServerResponse.minute + "\\n" +ServerResponse.generator)\par
+if(ServerResponse.validation == "ok")\{\par
+/// If the validation is successful, displays the "home" screen\par
+$.mobile.changePage("#home")\par
+\} \par
+\})\par
+As you can see to access one of the elements that were in the settlement of the PHP file, invoked only within the variable ServerResponse.\par
+\par
+To end the authentication process, if the response of the validation is successful, the command $.mobile.changePage changes page and leads to the welcome screen that present the correct credentials.\par
+\par
+Conclusion\par
+\par
+In this test application we have managed to send and receive dynamic information to a server, with some extra code on the server you can connect your app with any external database or webservice.\par
+\par
+We also use the JSONP format the browser to ignore restrictions and emulate our applications seamlessly in the browser. This format can also be applied in any interaction you make your application with data from an external server.\par
+\par
+Hooking up to external data using the processing capacity of a server, can increase the level of complexity of your application and take it to the next level!\par
+{\field{\*\fldinst{HYPERLINK "http://www.raymondcamden.com/index.cfm/jQuery"}}{\fldrslt{\ul\cf1 http://www.raymondcamden.com/index.cfm/jQuery}}}\f0\fs22\par
+Enjoyed the post? Please take some time to share it with your friends or leave a comment.\par
+}
+ 

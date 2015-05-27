@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RASHODI</title>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+ <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+      <script src="../js/js.js"></script>
+	
+  <script>
+$(document).on('pageinit', function() {
+$.ajax({
+    type: "GET",
+    url: "http://localhost:8070/5/radnici/radnici.xml",
+    dataType: "xml",
+    success: xmlParser2
+   });
+});
+
+function xmlParser2(xml) {
+
+
+$(xml).find("radnici").each(function () {
+ $(".rad").append('<div class="radnici"><div class="adv1">' + $(this).find("ime").text() +   '</div></div>');
+ 
+   $("#select-native-4").append('<option class="adv1">' + $(this).find("adv1").find("ime").text() + '</option>');
+	 $("#select-native-4").append('<option class="adv2">' + $(this).find("adv2").find("ime").text() + '</option>');
+});
+}
+</script>
+  <style>
+    @media all and (max-width: 35em) {
+    .my-breakpoint .ui-block-a, 
+    .my-breakpoint .ui-block-b, 
+    .my-breakpoint .ui-block-c,
+    .my-breakpoint .ui-block-d,
+    .my-breakpoint .ui-block-e { 
+      width: 100%; 
+      float:none; 
+    }
+  }
+ 
+  @media all and (min-width: 45em) {
+    .my-breakpoint.ui-grid-b .ui-block-a { width: 49.95%; }
+    .my-breakpoint.ui-grid-b .ui-block-b, 
+    .my-breakpoint.ui-grid-b .ui-block-c { width: 24.925%; }
+  }
+  .ui-filter-inset {
+    margin-top: 0;
+}
+  </style>
+  <script>
+
+// Some sample categorized data. This data is in-memory
+// for demonstration purposes, but could be loaded dynamically
+// via ajax.
+var categoryData = {
+	KANCELARIJE: {
+		name: "KANCELARIJE",
+		description: "GRADOVI",
+		items: [
+			{
+				name: "Niš",
+			},
+			{
+				name: "Zaječar",
+			},
+			{
+				name: "Požarevac",
+			}
+		]
+	},
+	RADNICI: {
+		name: "RADNICI",
+		description: "ZAPOŠLJENI",
+		items: [
+			{
+				name: "adv1",
+			},
+			{
+				name: "adv2",
+			},
+			{
+				name: "adv3",
+			},
+			{
+				name: "adv4",
+			},
+			{
+				name: "adv5",
+			},
+			{
+				name: "adv6",
+			},
+			{
+				name: "adv7",
+			}
+		]
+	},
+	MESTO: {
+		name: "MESTO",
+		description: "RADNO MESTO",
+		items: [
+			{
+				name: "SEKRETARICA",
+			},
+			{
+				name: "ADVOKAT",
+			},
+			{
+				name: "ŠEF",
+			}
+		]
+	}
+};
+
+// Load the data for a specific category, based on
+// the URL passed in. Generate markup for the items in the
+// category, inject it into an embedded page, and then make
+// that page the current active page.
+function showCategory( urlObj, options )
+{
+	var categoryName = urlObj.hash.replace( /.*category=/, "" ),
+
+		// Get the object that represents the category we
+		// are interested in. Note, that at this point we could
+		// instead fire off an ajax request to fetch the data, but
+		// for the purposes of this sample, it's already in memory.
+		category = categoryData[ categoryName ],
+
+		// The pages we use to display our content are already in
+		// the DOM. The id of the page we are going to write our
+		// content into is specified in the hash before the '?'.
+		pageSelector = urlObj.hash.replace( /\?.*$/, "" );
+
+	if ( category ) {
+		// Get the page we are going to dump our content into.
+		var $page = $( pageSelector ),
+
+			// Get the header for the page.
+			$header = $page.children( ":jqmData(role=header)" ),
+
+			// Get the content area element for the page.
+			$content = $page.children( ":jqmData(role=content)" ),
+
+			// The markup we are going to inject into the content
+			// area of the page.
+			markup = "<p>" + category.description + "</p><form><div class='ui-field-contain'><label for='select-native-kanc'></label><select name='select-native-kanc' id='select-native-kanc'>",
+			
+			// The array of items for this category.
+			cItems = category.items,
+
+			// The number of items in the category.
+			numItems = cItems.length;
+
+		// Generate a list item for each item in the category
+		// and add it to our markup.
+		for ( var i = 0; i < numItems; i++ ) {
+			markup += "<option><a href='#" + cItems[i].name + "' id=link4  data-transition='slidedown' data-role=button>" + cItems[i].name + "</a></option>";
+		}
+		markup += "</select>";
+	
+		// Find the h1 element in our header and inject the name of
+		// the category into it.
+		$header.find( "h1" ).html( category.name );
+
+		// Inject the category items markup into the content element.
+		$content.html( markup );
+
+		// Pages are lazily enhanced. We call page() on the page
+		// element to make sure it is always enhanced before we
+		// attempt to enhance the listview markup we just injected.
+		// Subsequent calls to page() are ignored since a page/widget
+		// can only be enhanced once.
+		$page.page();
+
+		// Enhance the listview we just injected.
+		$content.find( ":jqmData(role=select)" ).selectmenu({ theme: "a" });
+		// We don't want the data-url of the page we just modified
+		// to be the url that shows up in the browser's location field,
+		// so set the dataUrl option to the URL for the category
+		// we just loaded.
+		options.dataUrl = urlObj.href;
+
+		// Now call changePage() and tell it to switch to
+		// the page we just modified.
+		$.mobile.changePage( $page, options );
+	
+	}
+}
+
+ 
+// Listen for any attempts to call changePage().
+$(document).bind( "pagebeforechange", function( e, data ) {
+	// We only want to handle changePage() calls where the caller is
+	// asking us to load a page by URL.
+	if ( typeof data.toPage === "string" ) {
+		// We are being asked to load a page by URL, but we only
+		// want to handle URLs that request the data for a specific
+		// category.
+		var u = $.mobile.path.parseUrl( data.toPage ),
+			re = /^#category-item/;
+		if ( u.hash.search(re) !== -1 ) {
+			// We're being asked to display the items for a specific category.
+			// Call our internal method that builds the content for the category
+			// on the fly based on our in-memory category data structure.
+			showCategory( u, data.options );
+
+			// Make sure to tell changePage() we've handled this call so it doesn't
+			// have to do anything.
+			e.preventDefault();
+		}
+	}
+});
+
+$(document).on('change', '#select-native-kanc', function(){   
+var selektovanogra = $(this).find("option:selected").text();
+ $("option:selected").click(function(){
+    $("#link4").attr({
+      "href" : "#selektovanogra"
+    });
+	 $.mobile.changePage( "#selektovanogra", {
+	type: "post"
+});
+  });
+
+  });
+</script>
+
+
+</head>
+<body>
+  <div id="rashodi" data-role="page">
+  <div data-role="header">
+  <a href="../INDEX.HTML" data-icon="BACK" data-iconpos="notext" data-direction="reverse" rel="external">NAZAD</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	
+  <h1>rashodi po kategorijama</h1></div>
+  <div data-role="content">
+  	<h2>izaberi:</h2>
+  	<ul data-role="listview" data-inset="true">
+    	<li><a href="#category-items?category=KANCELARIJE">KANCELARIJE</a></li>
+    	<li><a href="#category-items?category=RADNICI">RADNICI</a></li>
+    	<li><a href="#category-items?category=MESTO">MESTO</a></li>
+    </ul>
+	<form>
+<div class="ui-field-contain">
+    <label for="select-native-a">lista svig ZAG koje duži advokat adv1</label>
+    <select name="select-native-a" id="select-native-a">
+	<option><p><a href="http://www.w3schools.com" id="link">W3Schools.com</a></p></option>
+    </select>
+</div>
+</form>
+  </div>
+ 
+</div>
+<div id="category-items" data-role="page">
+  <div data-role="header">  <a href="../index.html" data-icon="BACK" data-iconpos="notext" rel="external">NAZAD</a>
+	
+	 <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	<h1></h1></div>
+  <div data-role="content">
+ 
+
+  </div>
+</div>
+		<div data-role=page id=adv1>
+  <div data-role=header>
+    <a href="../rashodi/rashodi.html" data-icon="BACK" data-iconpos="notext" rel="external">NAZAD</a>
+	
+	 <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	
+    <h1></h1>
+  </div>
+<div role="main" class="ui-content"  data-content-theme=b>
+    <p></p>  
+<script>
+$(document).on('pageinit', function() {
+$.ajax({
+    type: "GET",
+    url: "http://localhost:8070/5/nalozi.xml",
+    dataType: "xml",
+    success: xmlParser3
+   });
+});
+
+function xmlParser3(xml) {
+$(xml).find("nalozi").each(function () {
+$(this).find("zaduzen").find("adv1").each(function(){
+  $("#select-native-adv1").append('<option>' + $(this).find("zag").text() + '</option>');});
+   
+	 });}
+ </script>
+ <form>
+<div class="ui-field-contain">
+    <label for="select-native-adv1">lista svig ZAG koje duži advokat adv1</label>
+    <select name="select-native-adv1" id="select-native-adv1">
+    </select>
+</div>
+</form>
+ </div>
+</div>
+		<div data-role=page id=adv2>
+  <div data-role=header>
+  <a href="../rashodi/rashodi.html" data-icon="BACK" data-iconpos="notext" data-direction="reverse" rel="external">NAZAD</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	
+    <h1></h1>
+  </div>
+<div role="main" class="ui-content"  data-content-theme=b>
+    <p></p>  
+	<script>
+$(document).on('pageinit', function() {
+$.ajax({
+    type: "GET",
+    url: "http://localhost:8070/5/nalozi.xml",
+    dataType: "xml",
+    success: xmlParseradv2
+   });
+});
+
+function xmlParseradv2(xml) {
+$(xml).find("nalozi").each(function () {
+$(this).find("zaduzen").find("adv2").each(function(){
+  $("#select-native-adv2").append('<option>' + $(this).find("zag").text() + '</option>');});
+   
+	 });}
+ </script>
+ <form>
+<div class="ui-field-contain">
+    <label for="select-native-adv2">lista svig ZAG koje duži advokat adv2</label>
+    <select name="select-native-adv2" id="select-native-adv2">
+    </select>
+</div>
+</form>
+	<a href="page-transitions-page.html" data-transition="flip" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="turn" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="flow" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidefade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="none" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+  </div>
+</div>
+</body>
+</html>

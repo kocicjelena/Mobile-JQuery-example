@@ -1,0 +1,387 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta name=viewport content="user-scalable=no,width=device-width" />
+  <meta name="" content="yes" />
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+   <script src="novi.js"></script>
+   <script>
+   $(document).on('pagebeforeshow', '#index', function(){       
+    $('#custom-btn').changeButtonText('This is a new text');
+});
+$( document ).on( "pageinit", function() {
+	$( document ).one( "click", "#janstr", function () {  
+	$('#janstr').changeButtonText('7');});
+	$( document ).one( "click", "#addAll", function () {  
+                var add = 0;
+                $(".amt").each(function() {
+                    add += Number($(this).val());
+                });
+                $("#para").text("Sum of all textboxes is : " + add);
+            });
+			$( document ).one( "click", "#jan", function () {  
+			var add1 = 0;
+                $(".amt1").each(function() {
+                    add1 += Number($(this).val());
+                });
+	$('#jan').changeButtonText(add1);
+	
+	});
+	$( document ).one( "click", "#feb", function () {  
+			var addfeb = 0;
+                $(".amtfeb").each(function() {
+                    addfeb += Number($(this).val());
+                });
+	$('#feb').changeButtonText(addfeb);
+	
+	});
+	$( document ).one( "click", "#mart", function () {  
+			var addmart = 0;
+                $(".amtmart").each(function() {
+                    addmart += Number($(this).val());
+                });
+	$('#mart').changeButtonText(addmart);
+	
+	});
+	$( document ).one( "click", "#struja", function () {  
+			var addstruja = 0;
+                $("#amtstruja").each(function() {
+                    addstruja += Number($(this).val());
+                });
+	$('#struja').changeButtonText(addstruja);
+	
+	});
+});
+ (function($) {
+            /*
+             * Changes the displayed text for a jquery mobile button.
+             * Encapsulates the idiosyncracies of how jquery re-arranges the DOM
+             * to display a button for either an <a> link or <input type="button">
+             */
+            $.fn.changeButtonText = function(newText) {
+                return this.each(function() {
+                    $this = $(this);
+                    if( $this.is('a') ) {
+                        $('span.ui-btn-text',$this).text(newText);
+                        return;
+                    }
+                    if( $this.is('input') ) {
+                        $this.val(newText);
+                        // go up the tree
+                        var ctx = $this.closest('.ui-btn');
+                        $('span.ui-btn-text',ctx).text(newText);
+                        return;
+                    }
+                });
+            };
+        })(jQuery);
+</script>
+<style>
+/* Show priority 1 at 320px (20em x 16px) */
+@media screen and (min-width: 20em) {
+   .my-custom-class th.ui-table-priority-1,
+   .my-custom-class td.ui-table-priority-1 {
+     display: table-cell;
+   }
+}
+/* Show priority 2 at 480px (30em x 16px) */
+@media screen and (min-width: 30em) {
+   .my-custom-class  th.ui-table-priority-2,
+   .my-custom-class td.ui-table-priority-2 {
+     display: table-cell;
+   }
+}
+ </style>
+</head> 
+
+<body> 
+
+<div data-role=page id=home>
+  <div data-role=header>
+     <a HREF="../index.html" data-icon="back" data-iconpos="notext" data-role=button rel="external">NAZAD</a>
+   
+	 <a href="../nav.html" data-icon="search" data-iconpos="notext" data-transition="fade">Search</a>
+	
+    <h1>novi nalog</h1>
+  </div>
+
+  <div data-role=content>
+  <table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="ui-responsive table-stroke"  data-mode="reflow">
+  <thead>
+    <tr>
+      <th class="my-custom-class" data-priority="2"></th>
+      <th class="my-custom-class"></th>
+      <th class="my-custom-class" data-priority="3"></th>
+      <th class="my-custom-class" data-priority="1"><abbr title=""></abbr></th>
+      <th class="my-custom-class" data-priority="4"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>NIS
+      <th></th>
+      <td>januar</td>
+      <td>februar</td>
+      <td>mart</td>
+	  <td>april</td>
+	  <td>maj</td>
+	  <td>jun</td>
+	  <td>jul</td>
+	  <td>avgust</td>
+	  <td>septembar</td>
+	  <td>oktobar</td>
+	  <td>novembar</td>
+	  <td>decembar</td>
+    </tr>
+    <tr>
+      <th>struja</th>
+      <td><input id="amtstruja" class="amt1" type="text" /> </td>
+      <td><input id="amtstruja" class="amtfeb" type="text" /> </td>
+      <td><input id="amtstruja" class="amtmart" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtapril" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtmaj" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtjun" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtjul" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtavg" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtsep" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtokt" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtnov" type="text" /> </td>
+	   <td><input id="amtstruja" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="struja" value="struja" /></td>
+	 <td>
+            <input class="inputtotal" value="10" />
+        </td>
+    </tr>
+    <tr>
+      <th>voda</th>
+      <td><input id="amtvoda" class="amt1" type="text" /></td>
+      <td><input id="amtvoda" class="amtfeb" type="text" /></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	   <td><input id="Text1" class="amt" type="text" /></td>
+	  <td>
+            <input class="inputtotal" value="32" />
+        </td>
+    </tr>
+    <tr>
+      <th>grejanje</th>
+      <td><input id="amtgrejanje" class="amt1" type="text" /></td>
+      <td><input id="amtgrejanje" class="amtfeb" type="text" /></td>
+      <td><input id="amtgrejanje" class="amtmart" type="text" /></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	   <td><input id="Text1" class="amt" type="text" /></td>
+	 <td>
+            <input class="inputtotal" value="15" />
+        </td>
+    </tr>
+    <tr>
+      <th>fix.telefon</th>
+      <td><input id="amtstruja" class="amt1" type="text" /></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>mob.telefon</th>
+      <td><input id="amtstruja" class="amt1" type="text" /></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>internet</th>
+      <td><input id="amtstruja" class="amt1" type="text" /></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>zakup</th>
+      <td><input id="amtstruja" class="amt1" type="text" /></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>higijeničarka</th>
+      <td><input id="amtstruja" class="amt1" type="text" /></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>video nadzor</th>
+      <td><input id="amtstruja" class="amt1" type="text" /></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>invest.<br />održavanje</th>
+      <td><input id="amtstruja" class="amt1" type="text" /></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>kancelarijski<br /> materijal</th>
+      <td><input id="amtstruja" class="amt1" type="text" /></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>štampači,<br /> toneri</th>
+      <td><input id="amtstruja" class="amt1" type="text" /></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td><input id="Text3" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>putni <br />troškovi</th>
+      <td><input id="amtstruja" class="amt1" type="text" /></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td>  <input id="Text2" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>gorivo </th>
+      <td><input id="amtstruja" class="amt1" type="text" /></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	     <tr>
+		 <th>suma</th>
+	   <td><input type="button" id="jan" value="jan" /></td>
+	    <td><input type="button" id="feb" value="feb" /></td>
+		 <td></td>
+		  <td></td>
+		   <td></td> <td></td>
+		    <td></td>
+			 <td></td>
+			  <td><input type="button" id="janstr" value="6" /></td>
+			   <td><a data-role="button" id="custom-btn">This is</a>
+			</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+		    <td><input id="addAll" type="button" value="suma je" />
+    <p id="para" /> </td>
+        <td>
+            <input id="total" /></td>
+      
+    </tr> 
+	
+  
+  </tbody>
+</table>
+<input type="button" id="add_and_refresh" data-role="button" data-icon="refresh" data-theme="c" data-inline="true" value="dodaj rashod">
+
+  </div>
+</div>
+
+</body>
+</html>

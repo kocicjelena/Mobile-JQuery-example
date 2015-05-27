@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+    <kancelarije>
+    <nis>
+    <ime>NIS</ime>
+     </nis>
+	 <ns>
+    <ime>NOVI SAD</ime>
+     </ns>
+	 <leskovac>
+    <ime>leskovac</ime>
+     </leskovac>
+	 <krusevac>
+    <ime>krusevac</ime>
+     </krusevac>
+	 <beograd>
+    <ime>beograd</ime>
+     </beograd>
+</kancelarije>

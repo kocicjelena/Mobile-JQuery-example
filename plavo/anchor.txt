@@ -1,0 +1,23 @@
+<div data-role="page">
+	<div data-role="header">
+		<h1>Home</h1>
+		<!-- menu trigger -->
+		<a data-icon="gear" data-iconpos="notext" href="#menu" data-rel="popup" data-position-to="#menu-anchor" data-transition="slidedown">Menu</a>
+	</div>
+	<div data-role="content">
+		<!-- menu position helper -->
+		<div id="menu-anchor"></div>
+		<!-- menu content -->
+		<div id="menu" data-role="popup">
+			<ul data-role="listview" data-inset="true">
+				<li><a href="/">Link 1</a></li>
+				<li><a href="/">Link 2</a></li>
+				<li><a href="/">Link 3</a></li>
+			</ul>
+		</div>
+		<p>Click the menu button in top left corner. Menu should appear somewhere above this line.</p>
+	</div>
+	<div data-role="footer">
+		<p>Footer</p>
+	</div>
+</div>

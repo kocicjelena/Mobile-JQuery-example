@@ -1,0 +1,328 @@
+$.ajax({
+    type: 'GET',
+    url: 'ajax_search_locations.php',
+    data: { name: $('txtSearch').val(),  page: page },
+    dataType: 'json',
+    complete: function(XMLHttpRequest, textStatus) {
+    if (XMLHttpRequest.status === 200)
+    {
+
+    var txt= "<div class=\"d"+id2+"\" style=\"display:none\">"+
+        "<div id='adv' class='usual'> "+
+        "<ul>"+
+         "<li><a href='#t13'>Tab 1</a></li> "+
+         "<li><a href='#t23' class='selected'>Tab 2</a></li> "+
+        " <li><a href='#t33'>Tab 3</a></li> "+
+        "</ul> "+
+        "<div id='t13' style='display: none; '>This is tab 1.</div> "+
+        "<div id='t23' style='display: block; '>More content in tab 2.</div>" +
+        " <div id='t33' style='display: none; '>Tab 3 is always last!</div> "+
+        "</div> "+
+        "</div>";
+
+    $('#search_locations_result').html(txt);
+    }
+    }
+});
+I guess you have to understand how jQuery selectors work, before.
+
+PS: server's response will be a JSON, as I've specified in the dataType.
+
+If your dataType is XML then you have to change your call like this
+
+dataType: "xml",
+Your XMLHttpRequest.responseText should contain your XML and you will parse it with something like this:
+
+$(XMLHttpRequest.responseText).find("<your XML tag>").each(function()
+  {
+    // $(this).attr("<your XML attribute>");
+  });
+jqXHR
+As of jQuery 1.5, the $.ajax() method returns the jqXHR object, which is a superset of the XMLHTTPRequest object. For more information, see the jqXHR section of the $.ajax entry
+$.ajaxSetup({
+    "error": function(jqXHR, status, thrownError) {
+        alert('error');
+        var responseText = jQuery.parseJSON(jqXHR.responseText);
+        console.log(responseText);
+    }
+});
+
+2
+3
+4
+5
+6
+7
+8
+var xmlDocument = [create xml document];
+var xmlRequest = $.ajax({
+  url: "page.php",
+  processData: false,
+  data: xmlDocument
+});
+ 
+xmlRequest.done( handleResponse );
+
+
+Name	 Description
+ 	jqXHR()	
+Methods
+Name	 Description
+ 	abort()	 Cancels the current HTTP request.
+ 	getAllResponseHeaders()	 Retrieves all response headers in a single string
+ 	getResponseHeader(string)	 Retrieves a response header value by name
+ 	overrideMimeType(JsString)	 As of jQuery 1.5.1, the jqXHR object also contains the overrideMimeType() method (it was available in jQuery 1.4.x, as well, but was temporarily removed in jQuery 1.5). The .overrideMimeType() method may be used in the beforeSend() callback function, for example, to modify the response content-type header:
+ 	setRequestHeader(string, string)	 Adds custom HTTP headers to the request which departs from the standard by replacing the old value with the new one rather than concatenating the new value to the old one
+Properties
+Name	 Description
+ 	readyState	 Retrieves the current state of the request operation.
+ 	responseText	 Retrieves the response body as a string.
+ 	status	 Retrieves the HTTP status code of the request.
+ 	statusText	 Retrieves the friendly HTTP status of the request.
+	1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+(function ($) {
+ 
+    $.oldAjax = $.ajax;
+ 
+    $.ajax = function () {
+        var args = Array.prototype.slice.call(arguments);
+ 
+        var jqxhr = $.oldAjax.apply(this, args);
+ 
+        jqxhr.fail(function () {
+            if (/application\/json/.test(jqxhr.getResponseHeader('Content-Type'))) {
+                try {
+                    jqxhr.appError = JSON.parse(jqxhr.responseText);
+                } catch(e) {
+                }
+            }
+        });
+ 
+        return jqxhr;
+    };
+ 
+})(window.jQuery);
+$(document).ready( function () {
+    if ( $.fn.dataTableSettings.length >= 1 ) {
+        $('#example').dataTable().bind('xhr', function ( e, oSettings ) {
+            var n = document.getElementById('latest_xhr');
+            n.innerHTML = JSON.stringify(
+                JSON.parse(oSettings.jqXHR.responseText), null, 2
+            );
+            n.className = "brush: js;"
+            SyntaxHighlighter.highlight({}, n);
+        } );
+    }
+} );
+http://tutorials.jenkov.com/jquery/ajax.html
+JQuery's AJAX features makes it possible and easy use AJAX in your HTML pages. AJAX (Asynchronous Javascript And XML) makes it possible to fetch content from a server in the background (asynchronously), and update parts of your page with the new content - all without having to reload the complete HTML page.
+The JQuery AJAX features are very advanced, and very comprehensive. Thus, I will only go through the most basic of it here. Just enough to get you started, and to give you an idea of how it works, and what you can do with it. For a full description, go to JQuery's AJAX page, here:
+JQuery AJAX.
+jQuery AJAX Example
+Here is first a jQuery AJAX example showing how to make an AJAX call in jQuery:
+var jqxhr =
+    $.ajax({
+        url: "/theServiceToCall.html",
+        data: {
+            name : "The name",
+            desc : "The description"
+        }
+    })
+    .success (function(response) { alert("Success: " + response) ; })
+    .error   (function()     { alert("Error")   ; })
+    .complete(function()     { alert("complete"); })
+    ;
+First the $.ajax() function is called. To this function is passed a JavaScript object which contains information about the AJAX call to make. In the example this object contains the URL and data to be sent to the server.
+The $.ajax() function returns an object. On this object is called three functions: success(), error() and complete(). These functions are called once the AJAX call has either succeded, failed, or when the AJAX calling is totally finished. In other words, the complete() function is called after either success() or error() has been called, when the AJAX function is about to finish.
+Receiving HTML
+By default JQuery does not parse the data received from the server. You can insert it raw into a div, like this:
+var jqxhr =
+    $.ajax({
+        url: "/theServiceToCall.html",
+        data: {
+            name : "The name",
+            desc : "The description"
+        }
+    })
+    .success (function(response) { $('#theDiv').html(response)})
+    .error   (function()     { alert("Error")   ; })
+    ;
+Notice how the success() function selects a div with the id theDiv, and calls its html() function, passing as parameter the data received from the server.
+Receiving JSON
+If you want JQuery to interpret the data received from the server as JSON, you must add the dataType : 'json' parameter to the $.ajax() call. Imagine you get a JSON object back from the server that looks like this:
+{
+    "param1" : "hello world"
+}
+Then you can parse that JSON object, and reference the param1 property, with this $.ajax() call:
+var jqxhr =
+    $.ajax({
+        url: "/theServiceToCall.html",
+        dataType: 'json',
+        data: {
+            name : "The name",
+            desc : "The description"
+        }
+    })
+    .success (function(response) { alert("Success: " + response.param1) ; })
+    .error   (function()     { alert("Error")   ; })
+    ;
+Sending Parameters
+You can send parameters to the server via JQuery's AJAX functions. You have already seen examples of that. It's the data property of the JavaScript object passed to the $.ajax() function which contain the data to send to the server. Here is an example with the data object marked in bold:
+var jqxhr =
+    $.ajax({
+        url: "/theServiceToCall.html",
+        data: {
+            name : "The name",
+            desc : "The description"
+            }
+    })
+    .success (function(response) { alert("Success: " + response.param1) ; })
+    .error   (function()     { alert("Error")   ; })
+    ;
+The data property should always be a JavaScript object. It's properties are serialized into a reqular query string (for GET requests), or a normal post body parameter string (for POST requests). This serialized string is then sent to the server, along with the AJAX request.
+On the server you can read the properties of the data object as if they were sent as simple request parameters, via either GET or POST. Just like if the properties had been fields in a form. In the example above, the server would be able to read two request properties: name and desc.
+Sending Raw Data
+If you do not want JQuery to convert the data object into a serialized parameter string, you can avoid this by setting the processData : false in the JavaScript object passed to the $.ajax() function. Here is an example:
+var jqxhr =
+    $.ajax({
+        url: "/test.jsp",
+        processData : false,
+        type : "POST",
+        data: "THE DATA",
+    })
+    .success (function(response) { $('#ajaxDiv').html(response) })
+    .error   (function(message)  { alert("error: " + message)   ; })
+    ;
+Notice the processData property which is set to false. This tells JQuery not to process the data property before sending it to the server.
+Second, notice the type property, which is set to "POST". This tells JQuery to POST the data to the server.
+Third, notice how the data property is now just a string of raw data to be sent to the server. You cannot use a JavaScript object as data property, when you do not process the data before sending them.
+
+
+Next:   JQuery Plugins
+var  formData = "name=ravi&age=31";  //Name value Pair
+    or
+var formData = {name:"ravi",age:"31"}; //Array 
+ 
+$.ajax({
+    url : "AJAX_POST_URL",
+    type: "POST",
+    data : formData,
+    success: function(data, textStatus, jqXHR)
+    {
+        //data - response from server
+    },
+    error: function (jqXHR, textStatus, errorThrown)
+    {
+ 
+    }
+});
+var jqXHR = jQuery.post( url [, data ] [, success(data, textStatus, jqXHR) ] [, dataType ] );
+//request with URL,data,success callback
+$.post("AJAX_POST_URL",
+    {name:"ravi",age:"31"},
+    function(data, textStatus, jqXHR)
+    {
+          //data: Received from server
+    });
+ 
+//request with URL,success callback
+$.post("AJAX_POST_URL",function(data)
+{
+    //data: Received from server
+});
+//request with only URL
+$.post("AJAX_POST_URL");
+--
+$.post("AJAX_POST_URL",
+    {username:"ravi",pass:"124",submit:true},
+    function(data, textStatus, jqXHR)
+    {
+        //data - response from server
+    }).fail(function(jqXHR, textStatus, errorThrown) 
+    {
+        alert(textStatus);
+    });
+ 
+//With jqXHR callbacks .done() and .fail()
+$.post("AJAX_POST_URL",
+    {username:"ravi",pass:"124",submit:true}).done(function(data, textStatus, jqXHR) 
+        {
+ 
+        }).fail(function(jqXHR, textStatus, errorThrown) 
+    {
+        alert(textStatus);
+    });
+	--
+	<form name="myform" id="myform" action="ajax-post.php">
+User: <input type="text" value="Ravishanker" name="user"  /> <br/>
+Password: <input type="password" name="password" value="abcdefgh" />
+<input type="hidden" name="xyz" value="123" />
+<input type="hidden" name="submit" value="true" />
+ 
+</form>
+---
+//var formData = $("#myform").serialize();  //or
+var formData = $("#myform").serializeArray();
+var URL = $("#myform").attr("action");
+$.post(URL,
+    formData,
+    function(data, textStatus, jqXHR)
+    {
+       //data: Data from server.    
+    }).fail(function(jqXHR, textStatus, errorThrown) 
+    {
+ 
+    });
+	<A HREF="notes.xml" onClick="sendRequest('notes.xml',handleRequest())">nklfsz</a>
+<script>
+$(document).ready(function(){
+$.ajax({
+url: './getEvents.php',
+data:'numnull',
+type:'GET',
+success: function(callback)
+{
+var Events = $(callback).find('event');
+$(Event).each(function(){
+var title = $(this).find('name').text();
+var descr = $(this).find('descr').text();
+var time = $(this).find('time').text();
+var date = $(this).find('date').text();
+var fav = ($(this).find('fav').text() == 'true' ? '':'');
+$("#home_list").append('<li data-role="list-divider">' + date + '</li><li><h3>' + title + '</h3></li>');
+$("#home_list").listview("refresh");
+});
+$.mobile.changePage("#index", "slide", true);
+},
+error.function(xhr, ajaxOptions, thrownError){
+alert(xhr.status);
+alert(throwError);
+}
+});
+});
+</script>-
+function handleRequest(req) {
+	var writeroot = XMLHttpFactories;
+	writeroot.innerHTML = req.responseText;
+}

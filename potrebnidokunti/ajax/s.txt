@@ -1,0 +1,4 @@
+$(XMLHttpRequest.responseText).find("<your XML tag>").each(function()
+  {
+    // $(this).attr("<your XML attribute>");
+  });

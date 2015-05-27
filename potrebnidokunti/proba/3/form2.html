@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+//Callback handler for form submit event
+$("#multiform").submit(function(e)
+{
+ 
+    var formObj = $(this);
+    var formURL = formObj.attr("action");
+    var formData = new FormData(this);
+    $.ajax({
+        url: formURL,
+    type: 'POST',
+        data:  formData,
+    mimeType:"multipart/form-data",
+    contentType: false,
+        cache: false,
+        processData:false,
+    success: function(data, textStatus, jqXHR)
+    {
+ 
+    },
+     error: function(jqXHR, textStatus, errorThrown) 
+     {
+     }          
+    });
+    e.preventDefault(); //Prevent Default action. 
+    e.unbind();
+}); 
+$("#multiform").submit(); //Submit the form
+</script>
+</head>
+<body>
+
+<form name="multiform" id="multiform" action="multi-form-submit.php" method="POST" enctype="multipart/form-data">
+    Name: <input type="text" name="name"  value="Ravi"/> <br/>
+    Age :<input type="text" name="age"  value="1" /> <br/>
+    Image :<input type="file" name="photo" /><br/>
+</form>
+</body>
+</html>

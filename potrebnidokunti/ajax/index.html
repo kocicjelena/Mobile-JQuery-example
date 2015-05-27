@@ -1,0 +1,43 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta name=viewport content="user-scalable=no,width=device-width" />
+  <link rel=stylesheet href=jquery.mobile/jquery.mobile.css />
+  <script src=jquery.js></script>
+  <script src=script.js></script>
+  <link rel="stylesheet"  href="http://code.jquery.com/mobile/latest/jquery.mobile.min.css" />
+    
+  
+     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script>
+
+$("#home").bind ("scrollstart", function (event)
+{
+  var txt= "scrollstart, ";
+  $("#evt").append (txt);
+});
+
+$("#home").bind ("scrollstop", function (event)
+{
+  var txt= "scrollstop, ";
+  $("#evt").append (txt);
+});
+
+</script>
+</head> 
+
+<body> 
+
+<div data-role=page id=home>
+  <div data-role=header>
+    <h1>Home</h1>
+  </div>
+
+  <div data-role=content>
+    <p> Events : </p>  
+    <div id=evt></div>
+  </div>
+</div>
+
+</body>
+</html>

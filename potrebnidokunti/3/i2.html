@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQM Complex Demo</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=no; target-densityDpi=device-dpi"/>
+     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>  
+	<script>
+	$( document ).on( "pageinit", function() {
+    $( document ).one( "click", "#custom-btn", function () {     
+    $('#custom-btn').changeButtonText('This is a new text');
+});});
+
+        (function($) {
+            /*
+             * Changes the displayed text for a jquery mobile button.
+             * Encapsulates the idiosyncracies of how jquery re-arranges the DOM
+             * to display a button for either an <a> link or <input type="button">
+             */
+            $.fn.changeButtonText = function(newText) {
+                return this.each(function() {
+                    $this = $(this);
+                    if( $this.is('a') ) {
+                        $('span.ui-btn-text',$this).text(newText);
+                        return;
+                    }
+                    if( $this.is('input') ) {
+                        $this.val(newText);
+                        // go up the tree
+                        var ctx = $this.closest('.ui-btn');
+                        $('span.ui-btn-text',ctx).text(newText);
+                        return;
+                    }
+                });
+            };
+        })(jQuery);
+		</script>  
+</head>
+<body>
+    <div data-role="page" id="index">
+        <div data-theme="a" data-role="header">
+            <h3>
+                First Page
+            </h3>
+            <a href="#second" class="ui-btn-right">Next</a>
+        </div>
+
+        <div data-role="content">
+            <a data-role="button" id="custom-btn">This is a button text</a>
+        </div>
+
+        <div data-theme="a" data-role="footer" data-position="fixed">
+
+        </div>
+    </div>    
+</body>
+</html>   

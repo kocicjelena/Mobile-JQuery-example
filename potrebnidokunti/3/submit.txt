@@ -1,0 +1,35 @@
+function submitForm(form){
+    var url = form.attr("action");
+    var formData = {};
+    $(form).find("input[name]").each(function (index, node) {
+        formData[node.name] = node.value;
+    });
+    $.post(url, formData).done(function (data) {
+        alert(data);
+    });
+}
+Second Solution: in this solution you can create an array of input values:
+
+function submitForm(form){
+    var url = form.attr("action");
+    var formData = $(form).serializeArray();
+    $.post(url, formData).done(function (data) {
+        alert(data);
+    });
+}
+<form action="target.php" method="post" >
+<input type="text" name="lname" />
+<input type="text" name="fname" />
+<input type="buttom" name ="send" onclick="return f(this.form ,this.form.fname ,this.form.lname) " >
+</form>
+---
+$('#my_table').empty(); or $('#my_content').empty();
+before
+
+$('#my_content').html(data);
+and a few other tricks, but i'm stuck!.
+
+note:
+
+$('#my_table').trigger('create');
+ onclick="re($('#step1'))"

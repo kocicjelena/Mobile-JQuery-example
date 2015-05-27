@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Short example on using indexedDB with jquery mobile - last updated: May 2012">
+  <meta name="author" content="Ido Green">
+
+  <title>lista za osiguranje</title>
+   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<!--<script src="../js/js.js"></script>
+  <script src="js/nalozi.js"></script>
+   This shim will let your indexedDB code run in Safari and Opera as well! The nice & sweet thing is that you are now ready (with the same code) to built a mobile web app that will work both on iOS, Android and other OS that got Opera 
+  
+  <script src="http://axemclion.github.com/IndexedDBShim/dist/IndexedDBShim.min.js"></script>
+-->
+<script>
+$(document).ready(function(){
+			$.ajax({
+				type: "GET",
+				url: "http://localhost:8070/5/nalozi.xml",
+				dataType: "xml",
+				success: function(xml) {
+					$(xml).find('nalozi').find('zaduzen').each(function(){
+						var id = $(this).attr('id');
+						var url = $(this).find('url').text();
+						$('<div class="items" id="link_'+id+'"></div>').html('<a href="'+url+'">'+id+'</a>').appendTo('#page-wrap');
+						$(this).find('adv1').each(function(){
+							var url = $(this).find('url').text();
+							var okrivljen = $(this).find('okrivljen').text();
+							var vestak = $(this).find('vestak').text();
+							var pbr = $(this).find('pbr').text();
+							var osiguranje = $(this).find('osiguranje').text();
+							var kbr = $(this).find('kbr').text();
+							var zag = $(this).find('zag').text();
+							var veza = $(this).find('veza').text();
+							var bpo = $(this).find('bpo').text();
+							$('<li class="zag"></li>').html(zag).appendTo('#link_'+id);
+							$('<li class="okrivljen"></li>').html(okrivljen).appendTo('#link_'+id);
+							$('<li class="vestak"></li>').html(vestak).appendTo('#link_'+id);
+							$('<li class="pbr"></li>').html(pbr).appendTo('#link_'+id);
+							$('<li class="kbr"></li>').html(kbr).appendTo('#link_'+id);
+							$('<li class="zag"></li>').html(zag).appendTo('#zagid');
+							$('<li class="okrivljen"></li>').html(okrivljen).appendTo('#okrivljen');
+							$('<li class="osiguranje"></li>').html(okrivljen).appendTo('#osiguranje');
+							$('<li class="osiguranje"></li>').html(okrivljen).appendTo('#osiguranje');
+							$('<li class="vestak"></li>').html(vestak).appendTo('#vestak');
+							$('<li class="pbr"></li>').html(pbr).appendTo('#pbr');
+							$('<li class="kbr"></li>').html(kbr).appendTo('#kbr');
+							$('<li class="url"></li>').html(kbr).appendTo('#url');
+							$('<option></option>').html(zag).appendTo('#select-native-2');
+							$('<option></option>').html(bpo).appendTo('#select-native-33');
+							$('<option></option>').html(veza).appendTo('#select-native-1');
+							$("#btn33svi").click(function(){
+							$("#test33osiguranje").val(osiguranje);
+							$("#test33svi").val(okrivljen);
+							$("#test33vestak").val(vestak);
+							$("#test33pbr").val(pbr);
+							$("#test33kbr").val(kbr);
+							$("#test33veza").val(veza);
+							$("#test33bpo").val(bpo);
+							$("#test33url").val(url);
+  });
+						});
+						$(this).find('adv2').each(function(){
+							var url2 = $(this).find('url').text();
+							var okrivljen2 = $(this).find('okrivljen').text();
+							var vestak2 = $(this).find('vestak').text();
+							var pbr2 = $(this).find('pbr').text();
+							var kbr2 = $(this).find('kbr').text();
+							var zag2 = $(this).find('zag').text();
+							var bpo2 = $(this).find('bpo').text();
+							var veza2 = $(this).find('veza').text();
+							$('<li class="zag2"></li>').html(zag2).appendTo('#link_'+id);
+							$('<li class="okrivljen"></li>').html(okrivljen2).appendTo('#link_'+id);
+							$('<li class="vestak"></li>').html(vestak2).appendTo('#link_'+id);
+							$('<li class="pbr"></li>').html(pbr2).appendTo('#link_'+id);
+							$('<li class="kbr"></li>').html(kbr2).appendTo('#link_'+id);
+							$('<li class="zag"></li>').html(zag2).appendTo('#zagid2');
+							$('<li class="okrivljen"></li>').html(okrivljen2).appendTo('#okrivljen2');
+							$('<li class="vestak"></li>').html(vestak2).appendTo('#vestak2');
+							$('<li class="pbr"></li>').html(pbr2).appendTo('#pbr2');
+							$('<li class="kbr"></li>').html(kbr2).appendTo('#kbr2');
+							$('<li class="url"></li>').html(url2).appendTo('#url2');
+							$('<option></option>').html(zag2).appendTo('#select-native-2');
+							$('<option></option>').html(bpo2).appendTo('#select-native-33');
+							$('<option></option>').html(veza2).appendTo('#select-native-1');
+							$("#btn33svi").click(function(){
+							$("#test33osiguranje").val(osiguranje2);
+							$("#test33svi").val(okrivljen2);
+							$("#test33vestak").val(vestak2);
+							$("#test33pbr").val(pbr2);
+							$("#test33kbr").val(kbr2);
+							$("#test33veza").val(veza2);
+							$("#test33bpo").val(bpo2);
+							$("#test33osiguranje").val(osiguranje2);
+							$("#test33url").val(url2);
+  });
+						});
+					});
+					 
+				}
+			});
+		});
+		
+</script>
+<script>
+    $(document).on('change', '#select-native-33', function(){   
+    var selektovano33 = $(this).find("option:selected").text();
+    document.querySelector("#status33").innerHTML = selektovano33;
+		$("#btn33").click(function(){
+        $("#test33").val(selektovano33);
+  });
+   });
+</script>
+<style>
+  /* Basic styles */
+.rwd-example .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example .ui-block-a,
+.rwd-example .ui-block-b,
+.rwd-example .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example .ui-block-a,
+    .rwd-example .ui-block-c {
+      float: left;
+      width: 14.925%;
+    }
+    .rwd-example .ui-block-a p,
+    .rwd-example .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example .ui-block-b{
+      float: left;
+      width: 70.15%;
+    }
+    .rwd-example .ui-block-a,
+    .rwd-example .ui-block-c {
+      float: left;
+      width: 14.925%;
+    }
+    .rwd-example > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example .ui-block-b {
+      float: left;
+      width: 70.15%;
+    }
+    .rwd-example .ui-block-a {
+      float: left;
+      width: 14.925%;
+    }
+    .rwd-example .ui-block-c {
+      float: left;
+      width: 14.925%;
+    }
+}
+  /* Basic styles */
+.rwd-example2 .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example2 p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example2 .ui-block-a,
+.rwd-example2 .ui-block-b,
+.rwd-example2 .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example2 > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example2 {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example2 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example2 .ui-block-b,
+	.rwd-example2 .ui-block-c {
+      float: left;
+      width: 37.53%;
+    }
+    .rwd-example2 .ui-block-a p,
+    .rwd-example2 .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example2 > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example2 > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example2 > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example2 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example .ui-block-b,
+    .rwd-example2 .ui-block-c {
+      float: left;
+      width: 37.53%;
+    }
+    .rwd-example2 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example2 > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example2 > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example2 .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example2 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+	.rwd-example2 .ui-block-b,
+    .rwd-example2 .ui-block-c {
+      float: left;
+      width: 37.53%;
+    }
+	 h6 {
+      float: right;
+      width: 20em;
+    }
+}
+  /* Basic styles */
+.rwd-example3 .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example3 p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example3 .ui-block-a,
+.rwd-example3 .ui-block-b,
+.rwd-example3 .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example3 > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example3 {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example3 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example3 .ui-block-b,
+	.rwd-example3 .ui-block-c {
+      float: left;
+      width: 49.95%;
+    }
+    .rwd-example3 .ui-block-a p,
+    .rwd-example3 .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example3 > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example3 > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example3 > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example3 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example3 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example3 .ui-block-c {
+      float: left;
+      width: 49.95%;
+    }
+    .rwd-example3 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example3 > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example3 > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example3 .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example3 .ui-block-a {
+      float: left;
+      width: 24.925%;
+    }
+	.rwd-example3 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example3 .ui-block-c {
+      float: left;
+      width: 49.95%;
+    }
+}
+.ui-icon-myicon:after {
+    background-image: url("img/img.jpg");
+    /* Make your icon fit */
+    background-size: 18px 18px;
+}
+  /* Basic styles */
+.rwd-example4 .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example4 p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example4 .ui-block-a,
+.rwd-example4 .ui-block-b,
+.rwd-example4 .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example4 > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example4 {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example4 .ui-body {
+       min-height: 5em;
+    }
+	.rwd-example4 .ui-block-a {
+      float: left;
+      width: 75.075%;
+    }
+	.rwd-example4 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example4 .ui-block-a p,
+    .rwd-example4 .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example4 > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example4 > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example4 > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example4 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example4 .ui-block-a {
+      float: left;
+      width: 75.075%;
+    }
+    .rwd-example4 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example4 > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example4 > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example4 .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example4 .ui-block-a {
+      float: left;
+      width: 75.075%;
+    }
+	.rwd-example4 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+}
+  /* Basic styles */
+.rwd-example5 .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example5 p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example5 .ui-block-a,
+.rwd-example5 .ui-block-b,
+.rwd-example5 .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example5 > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example5 {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example5 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example5 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+	.rwd-example5 .ui-block-a {
+      float: left;
+      width: 37.5375%;
+    }
+	.rwd-example5 .ui-block-c {
+      float: left;
+      width: 37.5375%;
+    }
+    .rwd-example5 .ui-block-a p,
+    .rwd-example5 .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example5 > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example5 > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example5 > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example5 .ui-body {
+       min-height: 5em;
+    }
+    .rwd-example5 .ui-block-a {
+      float: left;
+      width: 37.5375%;
+    }
+    .rwd-example5 .ui-block-c {
+      float: left;
+      width: 37.5375%;
+    }
+    .rwd-example5 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example5 > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example5 > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example5 .ui-body {
+      font-size: 100%;
+    }
+    .rwd-example5 .ui-block-a {
+      float: left;
+      width: 37.5375%;
+    }
+	.rwd-example5 .ui-block-b {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example5 .ui-block-c {
+      float: left;
+      width: 37.5375%;
+    }
+}
+</style>
+<script>
+  $(document).on('change', '#select-native-1', function(){   
+    var dirName = $.mobile.path.get( $( this ).attr( "#select-native-1" ) );
+	var selektovano = $(this).find("option:selected").text();
+    $( "#myResult" ).text( String( dirName ) );	
+        document.querySelector("#status").innerHTML = selektovano;
+		$("#btn3").click(function(){
+        $("#test3").val(selektovano);
+  });
+   });
+    $(document).on('change', '#select-native-2', function(){   
+    var dirName = $.mobile.path.get( $( this ).attr( "#select-native-2" ) );
+	var selektovano = $(this).find("option:selected").text();
+    $( "#myResult2" ).text( String( dirName ) );	
+        document.querySelector("#status2").innerHTML = selektovano;
+		$("#btn32").click(function(){
+        $("#test32").val(selektovano);
+  });
+   });
+    $(document).on('change', '#select-native-3', function(){   
+    var dirName = $.mobile.path.get( $( this ).attr( "#select-native-3" ) );
+	var selektovano = $(this).find("option:selected").text();
+    $( "#myResult3" ).text( String( dirName ) );	
+        document.querySelector("#status3").innerHTML = selektovano;
+		$("#btn33").click(function(){
+        $("#test33").val(selektovano);
+  });
+   });
+  </script>
+  <script>
+      var dbName = "j2";
+      var dbVersion = 4;
+      var todoDB = {};
+      var indexedDB = window.indexedDB || window.webkitIndexedDB ||
+        window.mozIndexedDB;
+
+      if ('webkitIndexedDB' in window) {
+        //   window.IDBTransaction = window.webkitIDBTransaction;
+        window.IDBKeyRange = window.webkitIDBKeyRange;
+      }
+
+      todoDB.indexedDB = {};
+      todoDB.indexedDB.db = null;
+
+      $(document).bind('pageinit', function() {
+        console.log("-- lets start the party --");
+        todoDB.indexedDB.open();
+        $("#addItem").click(function() {
+          addTodo();
+        });
+      });
+
+      todoDB.indexedDB.onerror = function(e) {
+        console.log(e);
+      };
+
+      todoDB.indexedDB.open = function() {
+        var request = indexedDB.open(dbName, dbVersion);
+
+        request.onsuccess = function(e) {
+          console.log ("success our DB: " + dbName + " is open and ready for work");
+          todoDB.indexedDB.db = e.target.result;
+          todoDB.indexedDB.getAllTodoItems();
+        }
+        
+        request.onupgradeneeded = function(e) {
+          todoDB.indexedDB.db = e.target.result;
+          var db = todoDB.indexedDB.db;
+          console.log ("Going to upgrade our DB from version: "+ e.oldVersion + " to " + e.newVersion);
+
+            try {
+              if (db.objectStoreNames && db.objectStoreNames.contains("todo")) {
+                db.deleteObjectStore("todo");
+              }
+            }
+            catch (err) {
+              console.log("got err in objectStoreNames:" + err);
+            }
+            var store = db.createObjectStore("todo",
+                {keyPath: "timeStamp"});
+            console.log("-- onupgradeneeded store:"+ JSON.stringify(store));
+          }
+       
+        request.onfailure = function(e) {
+          console.error("could not open our DB! Err:"+e);  
+        }
+        
+        request.onerror = function(e) {
+          console.error("Well... How should I put it? We have some issues with our DB! Err:"+e);
+        }
+      };
+
+      todoDB.indexedDB.addTodo = function(todoText) {
+        var db = todoDB.indexedDB.db;
+        var trans = todoDB.indexedDB.db.transaction("todo", "readwrite");
+        var store = trans.objectStore("todo");
+
+        var data = {
+          "text": todoText,
+          "timeStamp": new Date().getTime()
+        };
+
+        var request = store.put(data);
+
+        request.onsuccess = function(e) {
+          todoDB.indexedDB.getAllTodoItems();
+        };
+
+        request.onerror = function(e) {
+          console.error("Error Adding an item: ", e);
+        };
+      };
+
+      todoDB.indexedDB.deleteTodo = function(id) {
+        var db = todoDB.indexedDB.db;
+        var trans = db.transaction("todo", "readwrite");
+        var store = trans.objectStore("todo");
+
+        var request = store.delete(id);
+
+        request.onsuccess = function(e) {
+          todoDB.indexedDB.getAllTodoItems();
+        };
+
+        request.onerror = function(e) {
+          console.error("Error deleteing: ", e);
+        };
+      };
+
+      todoDB.indexedDB.getAllTodoItems = function() {
+        var todos = document.getElementById("todoItems");
+        todos.innerHTML = "";
+
+        var db = todoDB.indexedDB.db;
+        var trans = db.transaction("todo", "readonly");
+        var store = trans.objectStore("todo");
+
+        // Get everything in the store;
+        var keyRange = IDBKeyRange.lowerBound(0);
+        var cursorRequest = store.openCursor(keyRange);
+
+        cursorRequest.onsuccess = function(e) {
+          var result = e.target.result;
+          if(!!result == false)
+            return;
+
+          renderTodo(result.value);
+          result.continue();
+        };
+
+        cursorRequest.onerror = todoDB.indexedDB.onerror;
+      };
+
+      function renderTodo(row) {
+        var todos = document.getElementById("todoItems");
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        var t = document.createTextNode(row.text);
+
+        a.addEventListener("click", function() {
+          todoDB.indexedDB.deleteTodo(row.timeStamp);
+        }, false);
+        // some fun with jquery mobile data attributes
+        a.setAttribute("href", "#");
+        a.setAttribute("data-iconpos", "notext");
+        a.setAttribute("data-role", "button");
+        a.setAttribute("data-icon", "delete"); 
+        a.setAttribute("data-inline", "true");
+        
+        li.appendChild(a);
+        li.appendChild(t);
+        todos.appendChild(li)
+        // And lets create the new il item with its markup
+        $("#todoItems").trigger('create'); 
+      }
+
+      // Add an item only if we have more then zero letters
+      function addTodo() {
+        var todo = document.getElementById("todo");
+        if (todo.value.length > 0) {
+          todoDB.indexedDB.addTodo(todo.value);
+          todo.value = "";
+        }  
+      }
+
+    
+      // use it in case you wish to work on specific 'set' of data
+      function showAll() {
+        document.getElementById("ourList").innerHTML = "" ;   
+        var request = window.indexedDB.open(dbName);
+        request.onsuccess = function(event) {
+          // Enumerate the entire object store.
+          var db = todoDB.indexedDB.db;
+          var trans = db.transaction("todo", "readonly");
+          var request = trans.objectStore("todo").openCursor();
+          var ul = document.createElement("ul");
+          request.onsuccess = function(event) {
+            var cursor = request.result || event.result;
+            // If cursor is null then we've completed the enumeration.
+            if (!cursor) {
+              document.getElementById("ourList").appendChild(ul);
+              return;
+            }
+            var li = document.createElement("li");
+            li.textContent = "key: " + cursor.key + " => Todo text: " + cursor.value.text;
+            ul.appendChild(li);
+            cursor.continue();
+          }
+        }                    
+      }
+      </script>
+
+</head>
+<body>
+  <div data-role="page" id="listplavo" data-content-theme="b">
+
+    <div data-role="header">
+      <h1></h1>
+	<a href="../index.html" data-icon="BACK" data-iconpos="notext" rel="external">NAZAD</a>
+	
+	 <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	
+    </div>
+    <!-- /header -->
+
+    <div data-role="content">
+	 <div class="rwd-example5">
+    <div class="ui-block-a"> <div class="ui-body ui-body-b">
+	<p>BROJ PREDMETA OSIGURANJA</p>
+		<form>
+<div class="ui-field-contain">
+    <label for="select-native-33"></label>
+    <select name="select-native-33" id="select-native-33">
+    </select>
+</div>
+</form>
+	<button id="btn33svi">selektovan broj predmeta osiguranja</button> 
+<br />
+ <p>okrivljen<input type="text" id="test33svi" name="test33svi" placeholder="" /></p>
+<p> vestak    	<input type="text" id="test33vestak" name="test33vestak" placeholder="" /></p>
+ <p> parnica broj (pbr)<input type="text" id="test33pbr" name="test33pbr" placeholder="" /></p>
+ <p> krivica broj (kbr)<input type="text" id="test33kbr" name="test33kbr" placeholder="" /></p>
+ <p>  veza<input type="text" id="test33veza" name="test33veza" placeholder="" /></p>
+  <p> broj predmeta osiguranja<input type="text" id="test33bpo" name="test33bpo" placeholder="" /></p>
+     <p> osiguranje<input type="text" id="test33osiguranje" name="test33osiguranje" placeholder="" /></p>
+     <p> url advokata<input type="text" id="test33url" name="test33url" placeholder="" /></p>
+	 
+  
+			</div>
+   </div>
+    <!-- secondary story block #1 -->
+   
+	</div>
+	<a href=#proracunplavo id="status" data-transition="slidedown" data-role=button> proracunplavo </a>
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer">
+      <div data-role="controlgroup" data-type="horizontal">
+        </div>
+
+    </div> <!-- /footer --> 
+  </div>   <!-- /page -->
+<div data-role=page id=proracunplavo>
+  <div data-role=header>
+    <h1></h1>
+  </div>
+  <div data-role=content>
+    <p> </p>  
+	<a href="page-transitions-page.html" data-transition="flip" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="turn" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="flow" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidefade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="none" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+<a href="page-transitions-dialog.html" data-rel="dialog" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta name=viewport content="user-scalable=no,width=device-width" />
+  <meta name="" content="yes" />
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+   <script src="novi.js"></script>
+   <script>
+   $(document).on('pagebeforeshow', '#index', function(){       
+    $('#custom-btn').changeButtonText('This is a new text');
+});
+$( document ).on( "pageinit", function() {
+	$( document ).one( "click", "#janstr", function () {  
+	$('#janstr').changeButtonText('7');});
+	$( document ).one( "click", "#addAll", function () {  
+                var add = 0;
+                $(".amt").each(function() {
+                    add += Number($(this).val());
+                });
+                $("#para").text("Sum of all textboxes is : " + add);
+            });
+			$( document ).one( "click", "#jan", function () {  
+			var add1 = 0;
+                $(".amt1").each(function() {
+                    add1 += Number($(this).val());
+                });
+	$('#jan').changeButtonText(add1);
+	
+	});
+	$( document ).one( "click", "#feb", function () {  
+			var addfeb = 0;
+                $(".amtfeb").each(function() {
+                    addfeb += Number($(this).val());
+                });
+	$('#feb').changeButtonText(addfeb);
+	
+	});
+	$( document ).one( "click", "#mart", function () {  
+			var addmart = 0;
+                $(".amtmart").each(function() {
+                    addmart += Number($(this).val());
+                });
+	$('#mart').changeButtonText(addmart);
+	
+	});
+	$( document ).one( "click", "#ap", function () {  
+			var addap = 0;
+                $(".amtapril").each(function() {
+                    addap += Number($(this).val());
+                });
+	$('#ap').changeButtonText(addap);
+	
+	});
+	$( document ).one( "click", "#m", function () {  
+			var addm = 0;
+                $(".amtmaj").each(function() {
+                    addm += Number($(this).val());
+                });
+	$('#m').changeButtonText(addm);
+	
+	});
+	$( document ).one( "click", "#j", function () {  
+			var addj = 0;
+                $(".amtjun").each(function() {
+                    addj += Number($(this).val());
+                });
+	$('#j').changeButtonText(addj);
+	
+	});
+	$( document ).one( "click", "#jul", function () {  
+			var addjul = 0;
+                $(".amtjul").each(function() {
+                    addjul += Number($(this).val());
+                });
+	$('#jul').changeButtonText(addjul);
+	
+	});
+	$( document ).one( "click", "#avg", function () {  
+			var addavg = 0;
+                $(".amtavg").each(function() {
+                    addavg += Number($(this).val());
+                });
+	$('#avg').changeButtonText(addavg);
+	
+	});
+	$( document ).one( "click", "#s", function () {  
+			var adds = 0;
+                $(".amtsep").each(function() {
+                    adds += Number($(this).val());
+                });
+	$('#s').changeButtonText(adds);
+	
+	});
+	$( document ).one( "click", "#o", function () {  
+			var addo = 0;
+                $(".amtokt").each(function() {
+                    addo += Number($(this).val());
+                });
+	$('#o').changeButtonText(addo);
+	
+	});
+	$( document ).one( "click", "#n", function () {  
+			var addn = 0;
+                $(".amtnov").each(function() {
+                    addn += Number($(this).val());
+                });
+	$('#n').changeButtonText(addn);
+	
+	});
+	$( document ).one( "click", "#d", function () {  
+			var addd = 0;
+                $(".amtdec").each(function() {
+                    addd += Number($(this).val());
+                });
+	$('#d').changeButtonText(addd);
+	
+	});
+	$( document ).one( "click", "#struja", function () {  
+			var addstruja = 0;
+                $("#amtstruja").each(function() {
+                    addstruja = Number( $(".amtdec").val()) + Number( $(".amtnov").val()) + Number( $(".amtokt").val()) + Number( $(".amtsep").val()) + Number( $(".amtavg").val()) + Number( $(".amtjul").val()) + Number( $(".amtjun").val()) + Number( $(".amtmaj").val()) + Number( $(".amtapril").val()) + Number( $(".amtmart").val()) + Number( $(".amtfeb").val()) + Number( $(".amt1").val());
+                });
+	$('#struja').changeButtonText(addstruja);
+	
+	});
+	$( document ).one( "click", "#voda", function () {  
+			var addvoda = 0;
+                $("#amtvoda").each(function() {
+                    addvoda = Number( $(".amtdec").val()) + Number( $(".amtnov").val()) + Number( $(".amtokt").val()) + Number( $(".amtsep").val()) + Number( $(".amtavg").val()) + Number( $(".amtjul").val()) + Number( $(".amtjun").val()) + Number( $(".amtmaj").val()) + Number( $(".amtapril").val()) + Number( $(".amtmart").val()) + Number( $(".amtfeb").val()) + Number( $(".amt1").val());
+                });
+	$('#voda').changeButtonText(addvoda);
+	
+	});
+	$( document ).one( "click", "#grejanje", function () {  
+			var addgrejanje = 0;
+                $("#amtgrejanje").each(function() {
+                    addgrejanje = Number( $(".amtdec").val()) + Number( $(".amtnov").val()) + Number( $(".amtokt").val()) + Number( $(".amtsep").val()) + Number( $(".amtavg").val()) + Number( $(".amtjul").val()) + Number( $(".amtjun").val()) + Number( $(".amtmaj").val()) + Number( $(".amtapril").val()) + Number( $(".amtmart").val()) + Number( $(".amtfeb").val()) + Number( $(".amt1").val());
+                });
+	$('#grejanje').changeButtonText(addgrejanje);
+	
+	});
+	$( document ).one( "click", "#zakup", function () {  
+			var addzakup = 0;
+                $("#amtzak").each(function() {
+                    addzakup = Number( $(".amtdec").val()) + Number( $(".amtnov").val()) + Number( $(".amtokt").val()) + Number( $(".amtsep").val()) + Number( $(".amtavg").val()) + Number( $(".amtjul").val()) + Number( $(".amtjun").val()) + Number( $(".amtmaj").val()) + Number( $(".amtapril").val()) + Number( $(".amtmart").val()) + Number( $(".amtfeb").val()) + Number( $(".amt1").val());
+                });
+	$('#zakup').changeButtonText(addzakup);
+	
+	});
+	$( document ).one( "click", "#fix", function () {  
+			var addfix = 0;
+                $("#amtfix").each(function() {
+                    addfix = Number( $(".amtdec").val()) + Number( $(".amtnov").val()) + Number( $(".amtokt").val()) + Number( $(".amtsep").val()) + Number( $(".amtavg").val()) + Number( $(".amtjul").val()) + Number( $(".amtjun").val()) + Number( $(".amtmaj").val()) + Number( $(".amtapril").val()) + Number( $(".amtmart").val()) + Number( $(".amtfeb").val()) + Number( $(".amt1").val());
+                });
+	$('#fix').changeButtonText(addfix);
+	
+	});
+	$( document ).one( "click", "#mob", function () {  
+			var addmob = 0;
+                $("#amtmob").each(function() {
+                    addmob = Number( $(".amtdec").val()) + Number( $(".amtnov").val()) + Number( $(".amtokt").val()) + Number( $(".amtsep").val()) + Number( $(".amtavg").val()) + Number( $(".amtjul").val()) + Number( $(".amtjun").val()) + Number( $(".amtmaj").val()) + Number( $(".amtapril").val()) + Number( $(".amtmart").val()) + Number( $(".amtfeb").val()) + Number( $(".amt1").val());
+                });
+	$('#mob').changeButtonText(addmob);
+	
+	});
+	$( document ).one( "click", "#higijenicarka", function () {  
+			var addhigijenicarka = 0;
+                $("#amthig").each(function() {
+                    addhigijenicarka = Number( $(".amtdec").val()) + Number( $(".amtnov").val()) + Number( $(".amtokt").val()) + Number( $(".amtsep").val()) + Number( $(".amtavg").val()) + Number( $(".amtjul").val()) + Number( $(".amtjun").val()) + Number( $(".amtmaj").val()) + Number( $(".amtapril").val()) + Number( $(".amtmart").val()) + Number( $(".amtfeb").val()) + Number( $(".amt1").val());
+                });
+	$('#higijenicarka').changeButtonText(addhigijenicarka);
+	
+	});
+	$( document ).one( "click", "#internet", function () {  
+			var addinternet = 0;
+                $("#amtint").each(function() {
+                    addinternet = Number( $(".amtdec").val()) + Number( $(".amtnov").val()) + Number( $(".amtokt").val()) + Number( $(".amtsep").val()) + Number( $(".amtavg").val()) + Number( $(".amtjul").val()) + Number( $(".amtjun").val()) + Number( $(".amtmaj").val()) + Number( $(".amtapril").val()) + Number( $(".amtmart").val()) + Number( $(".amtfeb").val()) + Number( $(".amt1").val());
+                });
+	$('#internet').changeButtonText(addinternet);
+	
+	});
+	$( document ).one( "click", "#video", function () {  
+			var addvideo = 0;
+                $("#amtvid").each(function() {
+                    addvideo = Number( $(".amtdec").val()) + Number( $(".amtnov").val()) + Number( $(".amtokt").val()) + Number( $(".amtsep").val()) + Number( $(".amtavg").val()) + Number( $(".amtjul").val()) + Number( $(".amtjun").val()) + Number( $(".amtmaj").val()) + Number( $(".amtapril").val()) + Number( $(".amtmart").val()) + Number( $(".amtfeb").val()) + Number( $(".amt1").val());
+                });
+	$('#video').changeButtonText(addvideo);
+	
+	});
+});
+ (function($) {
+            /*
+             * Changes the displayed text for a jquery mobile button.
+             * Encapsulates the idiosyncracies of how jquery re-arranges the DOM
+             * to display a button for either an <a> link or <input type="button">
+             */
+            $.fn.changeButtonText = function(newText) {
+                return this.each(function() {
+                    $this = $(this);
+                    if( $this.is('a') ) {
+                        $('span.ui-btn-text',$this).text(newText);
+                        return;
+                    }
+                    if( $this.is('input') ) {
+                        $this.val(newText);
+                        // go up the tree
+                        var ctx = $this.closest('.ui-btn');
+                        $('span.ui-btn-text',ctx).text(newText);
+                        return;
+                    }
+                });
+            };
+        })(jQuery);
+</script>
+<style>
+/* Show priority 1 at 320px (20em x 16px) */
+@media screen and (min-width: 20em) {
+   .my-custom-class th.ui-table-priority-1,
+   .my-custom-class td.ui-table-priority-1 {
+     display: table-cell;
+   }
+}
+/* Show priority 2 at 480px (30em x 16px) */
+@media screen and (min-width: 30em) {
+   .my-custom-class  th.ui-table-priority-2,
+   .my-custom-class td.ui-table-priority-2 {
+     display: table-cell;
+   }
+}
+ </style>
+</head> 
+
+<body> 
+
+<div data-role=page id=home>
+  <div data-role=header>
+     <a HREF="../index.html" data-icon="back" data-iconpos="notext" data-role=button rel="external">NAZAD</a>
+   
+	 <a href="../nav.html" data-icon="search" data-iconpos="notext" data-transition="fade">Search</a>
+	
+    <h1>novi nalog</h1>
+  </div>
+
+  <div data-role=content>
+  <table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="ui-responsive table-stroke"  data-mode="reflow">
+  <thead>
+    <tr>
+      <th class="my-custom-class" data-priority="2"></th>
+      <th class="my-custom-class"></th>
+      <th class="my-custom-class" data-priority="3"></th>
+      <th class="my-custom-class" data-priority="1"><abbr title=""></abbr></th>
+      <th class="my-custom-class" data-priority="4"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>NIS
+      <th></th>
+      <td>januar</td>
+      <td>februar</td>
+      <td>mart</td>
+	  <td>april</td>
+	  <td>maj</td>
+	  <td>jun</td>
+	  <td>jul</td>
+	  <td>avgust</td>
+	  <td>septembar</td>
+	  <td>oktobar</td>
+	  <td>novembar</td>
+	  <td>decembar</td>
+    </tr>
+    <tr>
+      <th>struja</th>
+      <td><input id="amtstruja" class="amt1" type="text" /> </td>
+      <td><input id="amtstruja" class="amtfeb" type="text" /> </td>
+      <td><input id="amtstruja" class="amtmart" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtapril" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtmaj" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtjun" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtjul" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtavg" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtsep" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtokt" type="text" /> </td>
+	  <td><input id="amtstruja" class="amtnov" type="text" /> </td>
+	   <td><input id="amtstruja" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="struja" value="struja" /></td>
+	 <td>
+            <input class="inputtotal" value="10" />
+        </td>
+    </tr>
+    <tr>
+      <th>voda</th>
+      <td><input id="amtvoda" class="amt1" type="text" /></td>
+      <td><input id="amtvoda" class="amtfeb" type="text" /></td>
+	  <td><input id="amtvoda" class="amtmart" type="text" /> </td>
+      <td><input id="amtvoda" class="amtapril" type="text" /> </td>
+	  <td><input id="amtvoda" class="amtmaj" type="text" /> </td>
+	  <td><input id="amtvoda" class="amtjun" type="text" /> </td>
+	  <td><input id="amtvoda" class="amtjul" type="text" /> </td>
+	  <td><input id="amtvoda" class="amtavg" type="text" /> </td>
+	  <td><input id="amtvoda" class="amtsep" type="text" /> </td>
+	  <td><input id="amtvoda" class="amtokt" type="text" /> </td>
+	  <td><input id="amtvoda" class="amtnov" type="text" /> </td>
+	   <td><input id="amtvoda" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="voda" value="voda" /></td>
+	   <td><input id="Text1" class="amt" type="text" /></td>
+	  <td>
+            <input class="inputtotal" value="32" />
+        </td>
+    </tr>
+    <tr>
+      <th>grejanje</th>
+      <td><input id="amtgrejanje" class="amt1" type="text" /></td>
+      <td><input id="amtgrejanje" class="amtfeb" type="text" /></td>
+      <td><input id="amtgrejanje" class="amtmart" type="text" /></td>
+	    <td><input id="amtgrejanje" class="amtapril" type="text" /> </td>
+	  <td><input id="amtgrejanje" class="amtmaj" type="text" /> </td>
+	  <td><input id="amtgrejanje" class="amtjun" type="text" /> </td>
+	  <td><input id="amtgrejanje" class="amtjul" type="text" /> </td>
+	  <td><input id="amtgrejanje" class="amtavg" type="text" /> </td>
+	  <td><input id="amtgrejanje" class="amtsep" type="text" /> </td>
+	  <td><input id="amtgrejanje" class="amtokt" type="text" /> </td>
+	  <td><input id="amtgrejanje" class="amtnov" type="text" /> </td>
+	   <td><input id="amtgrejanje" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="grejanje" value="grejanje" /></td>
+	   <td><input id="Text1" class="amt" type="text" /></td>
+	 <td>
+            <input class="inputtotal" value="15" />
+        </td>
+    </tr>
+    <tr>
+      <th>fix.telefon</th>
+      <td><input id="amtfix" class="amt1" type="text" /></td>
+      <td><input id="amtfix" class="amtfeb" type="text" /></td>
+      <td><input id="amtfix" class="amtmart" type="text" /></td>
+	      <td><input id="amtfix" class="amtapril" type="text" /> </td>
+	  <td><input id="amtfix" class="amtmaj" type="text" /> </td>
+	  <td><input id="amtfix" class="amtjun" type="text" /> </td>
+	  <td><input id="amtfix" class="amtjul" type="text" /> </td>
+	  <td><input id="amtfix" class="amtavg" type="text" /> </td>
+	  <td><input id="amtfix" class="amtsep" type="text" /> </td>
+	  <td><input id="amtfix" class="amtokt" type="text" /> </td>
+	  <td><input id="amtfix" class="amtnov" type="text" /> </td>
+	   <td><input id="amtfix" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="fix" value="fix" /></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>mob.telefon</th>
+      <td><input id="amtmob" class="amt1" type="text" /></td>
+           <td><input id="amtmob" class="amtfeb" type="text" /></td>
+      <td><input id="amtmob" class="amtmart" type="text" /></td>
+	      <td><input id="amtmob" class="amtapril" type="text" /> </td>
+	  <td><input id="amtmob" class="amtmaj" type="text" /> </td>
+	  <td><input id="amtmob" class="amtjun" type="text" /> </td>
+	  <td><input id="amtmob" class="amtjul" type="text" /> </td>
+	  <td><input id="amtmob" class="amtavg" type="text" /> </td>
+	  <td><input id="amtmob" class="amtsep" type="text" /> </td>
+	  <td><input id="amtmob" class="amtokt" type="text" /> </td>
+	  <td><input id="amtmob" class="amtnov" type="text" /> </td>
+	   <td><input id="amtmob" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="mob" value="mob" /></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>internet</th>
+        <td><input id="amtint" class="amt1" type="text" /></td>
+           <td><input id="amtint" class="amtfeb" type="text" /></td>
+      <td><input id="amtint" class="amtmart" type="text" /></td>
+	      <td><input id="amtint" class="amtapril" type="text" /> </td>
+	  <td><input id="amtint" class="amtmaj" type="text" /> </td>
+	  <td><input id="amtint" class="amtjun" type="text" /> </td>
+	  <td><input id="amtint" class="amtjul" type="text" /> </td>
+	  <td><input id="amtint" class="amtavg" type="text" /> </td>
+	  <td><input id="amtint" class="amtsep" type="text" /> </td>
+	  <td><input id="amtint" class="amtokt" type="text" /> </td>
+	  <td><input id="amtint" class="amtnov" type="text" /> </td>
+	   <td><input id="amtint" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="internet" value="internet" /></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>zakup</th>
+             <td><input id="amtzak" class="amt1" type="text" /></td>
+           <td><input id="amtzak" class="amtfeb" type="text" /></td>
+      <td><input id="amtzak" class="amtmart" type="text" /></td>
+	      <td><input id="amtzak" class="amtapril" type="text" /> </td>
+	  <td><input id="amtzak" class="amtmaj" type="text" /> </td>
+	  <td><input id="amtzak" class="amtjun" type="text" /> </td>
+	  <td><input id="amtzak" class="amtjul" type="text" /> </td>
+	  <td><input id="amtzak" class="amtavg" type="text" /> </td>
+	  <td><input id="amtzak" class="amtsep" type="text" /> </td>
+	  <td><input id="amtzak" class="amtokt" type="text" /> </td>
+	  <td><input id="amtzak" class="amtnov" type="text" /> </td>
+	   <td><input id="amtzak" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="zakup" value="zakup" /></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>higijeničarka</th>
+      <td><input id="amthig" class="amt1" type="text" /></td>
+           <td><input id="amthig" class="amtfeb" type="text" /></td>
+      <td><input id="amthig" class="amtmart" type="text" /></td>
+	      <td><input id="amthig" class="amtapril" type="text" /> </td>
+	  <td><input id="amthig" class="amtmaj" type="text" /> </td>
+	  <td><input id="amthig" class="amtjun" type="text" /> </td>
+	  <td><input id="amthig" class="amtjul" type="text" /> </td>
+	  <td><input id="amthig" class="amtavg" type="text" /> </td>
+	  <td><input id="amthig" class="amtsep" type="text" /> </td>
+	  <td><input id="amthig" class="amtokt" type="text" /> </td>
+	  <td><input id="amthig" class="amtnov" type="text" /> </td>
+	   <td><input id="amthig" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="higijenicarka" value="higijenicarka" /></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>video nadzor</th>
+       <td><input id="amtvid" class="amt1" type="text" /></td>
+           <td><input id="amtvid" class="amtfeb" type="text" /></td>
+      <td><input id="amtvid" class="amtmart" type="text" /></td>
+	      <td><input id="amtvid" class="amtapril" type="text" /> </td>
+	  <td><input id="amtvid" class="amtmaj" type="text" /> </td>
+	  <td><input id="amtvid" class="amtjun" type="text" /> </td>
+	  <td><input id="amtvid" class="amtjul" type="text" /> </td>
+	  <td><input id="amtvid" class="amtavg" type="text" /> </td>
+	  <td><input id="amtvid" class="amtsep" type="text" /> </td>
+	  <td><input id="amtvid" class="amtokt" type="text" /> </td>
+	  <td><input id="amtvid" class="amtnov" type="text" /> </td>
+	   <td><input id="amtvid" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="video" value="video" /></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>invest.<br />održavanje</th>
+       <td><input id="amti" class="amt1" type="text" /></td>
+           <td><input id="amti" class="amtfeb" type="text" /></td>
+      <td><input id="amti" class="amtmart" type="text" /></td>
+	      <td><input id="amti" class="amtapril" type="text" /> </td>
+	  <td><input id="amti" class="amtmaj" type="text" /> </td>
+	  <td><input id="amti" class="amtjun" type="text" /> </td>
+	  <td><input id="amti" class="amtjul" type="text" /> </td>
+	  <td><input id="amti" class="amtavg" type="text" /> </td>
+	  <td><input id="amti" class="amtsep" type="text" /> </td>
+	  <td><input id="amti" class="amtokt" type="text" /> </td>
+	  <td><input id="amti" class="amtnov" type="text" /> </td>
+	   <td><input id="amti" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="odrzavanje" value="odrzavanje" /></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>kancelarijski<br /> materijal</th>
+      <td><input id="amtkd" class="amt1" type="text" /></td>
+           <td><input id="amtkd" class="amtfeb" type="text" /></td>
+      <td><input id="amtkd" class="amtmart" type="text" /></td>
+	      <td><input id="amtkd" class="amtapril" type="text" /> </td>
+	  <td><input id="amtkd" class="amtmaj" type="text" /> </td>
+	  <td><input id="amtkd" class="amtjun" type="text" /> </td>
+	  <td><input id="amtkd" class="amtjul" type="text" /> </td>
+	  <td><input id="amtkd" class="amtavg" type="text" /> </td>
+	  <td><input id="amtkd" class="amtsep" type="text" /> </td>
+	  <td><input id="amtkd" class="amtokt" type="text" /> </td>
+	  <td><input id="amtkd" class="amtnov" type="text" /> </td>
+	   <td><input id="amtkd" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="kancelarija" value="kancelarija" /></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>štampači,<br /> toneri</th>
+       <td><input id="amts" class="amt1" type="text" /></td>
+           <td><input id="amts" class="amtfeb" type="text" /></td>
+      <td><input id="amts" class="amtmart" type="text" /></td>
+	      <td><input id="amts" class="amtapril" type="text" /> </td>
+	  <td><input id="amts" class="amtmaj" type="text" /> </td>
+	  <td><input id="amts" class="amtjun" type="text" /> </td>
+	  <td><input id="amts" class="amtjul" type="text" /> </td>
+	  <td><input id="amts" class="amtavg" type="text" /> </td>
+	  <td><input id="amts" class="amtsep" type="text" /> </td>
+	  <td><input id="amts" class="amtokt" type="text" /> </td>
+	  <td><input id="amts" class="amtnov" type="text" /> </td>
+	   <td><input id="amts" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="oprema" value="oprema" /></td>
+	  <td><input id="Text3" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>putni <br />troškovi</th>
+      <td><input id="amtp" class="amt1" type="text" /></td>
+           <td><input id="amtvid" class="amtfeb" type="text" /></td>
+      <td><input id="amtp" class="amtmart" type="text" /></td>
+	      <td><input id="amtp" class="amtapril" type="text" /> </td>
+	  <td><input id="amtp" class="amtmaj" type="text" /> </td>
+	  <td><input id="amtp" class="amtjun" type="text" /> </td>
+	  <td><input id="amtp" class="amtjul" type="text" /> </td>
+	  <td><input id="amtp" class="amtavg" type="text" /> </td>
+	  <td><input id="amtp" class="amtsep" type="text" /> </td>
+	  <td><input id="amtp" class="amtokt" type="text" /> </td>
+	  <td><input id="amtp" class="amtnov" type="text" /> </td>
+	   <td><input id="amtp" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="troskovi" value="troskovi" /></td>
+	  <td>  <input id="Text2" class="amt" type="text" /></td>
+    </tr>
+	<tr>
+      <th>gorivo </th>
+      <td><input id="amtgor" class="amt1" type="text" /></td>
+           <td><input id="amtgor" class="amtfeb" type="text" /></td>
+      <td><input id="amtgor" class="amtmart" type="text" /></td>
+	      <td><input id="amtgor" class="amtapril" type="text" /> </td>
+	  <td><input id="amtgor" class="amtmaj" type="text" /> </td>
+	  <td><input id="amtgor" class="amtjun" type="text" /> </td>
+	  <td><input id="amtgor" class="amtjul" type="text" /> </td>
+	  <td><input id="amtgor" class="amtavg" type="text" /> </td>
+	  <td><input id="amtgor" class="amtsep" type="text" /> </td>
+	  <td><input id="amtgor" class="amtokt" type="text" /> </td>
+	  <td><input id="amtgor" class="amtnov" type="text" /> </td>
+	   <td><input id="amtgor" class="amtdec" type="text" /></td>
+	    <td><input type="button" id="gorivo" value="gorivo" /></td>
+	  <td><input id="Text1" class="amt" type="text" /></td>
+    </tr>
+	     <tr>
+		 <th>suma</th>
+	   <td><input type="button" id="jan" value="jan" /></td>
+	    <td><input type="button" id="feb" value="feb" /></td>
+		 <td><input type="button" id="mart" value="mart" /></td>
+		  <td><input type="button" id="ap" value="ap" /></td>
+		   <td><input type="button" id="m" value="m" /></td> 
+		   <td><input type="button" id="j" value="j" /></td>
+		    <td><input type="button" id="jul" value="jul" /></td>
+			 <td><input type="button" id="avg" value="avg" /></td>
+			  <td><input type="button" id="s" value="s" /></td>
+			   <td><input type="button" id="o" value="o" /></td>
+			    <td><input type="button" id="n" value="n" /></td>
+				 <td><input type="button" id="d" value="d" /></td>
+			  <td><input type="button" id="janstr" value="6" /></td>
+			   <td><a data-role="button" id="custom-btn">This is</a>
+			</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+		    <td><input id="addAll" type="button" value="suma je" />
+    <p id="para" /> </td>
+        <td>
+            <input id="total" /></td>
+      
+    </tr> 
+	
+  
+  </tbody>
+</table>
+<input type="button" id="add_and_refresh" data-role="button" data-icon="refresh" data-theme="c" data-inline="true" value="dodaj rashod">
+
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+</head>
+<body>
+    <div data-role="page" id="index">
+        <div data-role="content">
+            <input name="text-1" id="text1" value="" type="text">
+            <input name="text-2" id="text2" value="" type="text">
+            <a href="#" data-role="button" id="useJSONP">Update</a>
+        </div>
+        <script type="text/javascript" charset="utf-8">
+            $(document).on('pagebeforeshow', '#index', function () {
+                $("#useJSONP").click(function () {
+                    var id = $("#text1").val();
+                    var name = $("#text2").val();
+                    var userData = { "EmployeeID": id, "FirstName": name };
+                    $.ajax({
+                        url: "http://localhost:8070/5/potrebnidokunti/Data.xml",
+                        type: "POST",
+                        data: userData,
+                        crossDomain: true,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "jsonp",
+                        processdata: true,
+                        success: function res(msg) {
+                            alert("hello" + msg);
+                        },
+                        error: function error(response) {
+                            alert("error");
+                        }
+                    });
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>

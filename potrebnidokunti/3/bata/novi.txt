@@ -1,0 +1,669 @@
+<td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+
+var isAbs = $.mobile.path.isAbsoluteUrl("#foo");
+var isRel = $.mobile.path.isRelativeUrl("#foo");
+
+$.mobile.loadPage( "novi.html", {
+	type: "post",
+	data: $("form#search").serialize()
+});
+$.mobile.changePage( "searchresults.php", {
+	type: "post",
+	data: $("form#search").serialize()
+});
+Ok, so the answer here seems obvious now but it is still interesting to note. Thanks to Gajores for the hint. If you have dynamic content inserted into the DOM and a JQuery on() event handler is attached to a dynamic element, you must register the event handlers dynamically after insertion. If the JQuery on() event handler is attached to a static DOM element but refers to a dynamic element inside it can be attached as the DOM is loaded, even if the dynamic element is not there.
+
+I must say, this is the type of stuff that the documentation does not always explain well to the intermediate user.
+<a href="#popupPadded" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Popup with padding</a>
+<div data-role="popup" id="popupPadded" class="ui-content">
+<p>This is a popup with the <code>ui-content</code> class added to the popup container.</p>
+</div>
+
+// Load the data for a specific category, based on
+// the URL passed in. Generate markup for the items in the
+// category, inject it into an embedded page, and then make
+// that page the current active page.
+function showCategory( urlObj, options )
+{
+    var categoryName = urlObj.hash.replace( /.*category=/, "" ),
+
+        // Get the object that represents the category we
+        // are interested in. Note, that at this point we could
+        // instead fire off an ajax request to fetch the data, but
+        // for the purposes of this sample, it's already in memory.
+        category = categoryData[ categoryName ],
+
+        // The pages we use to display our content are already in
+        // the DOM. The id of the page we are going to write our
+        // content into is specified in the hash before the '?'.
+        pageSelector = urlObj.hash.replace( /\?.*$/, "" );
+
+    if ( category ) {
+        // Get the page we are going to dump our content into.
+        var $page = $( pageSelector ),
+
+            // Get the header for the page.
+            $header = $page.children( ":jqmData(role=header)" ),
+
+            // Get the content area element for the page.
+            $content = $page.children( ":jqmData(role=content)" ),
+
+            // The markup we are going to inject into the content
+            // area of the page.
+            markup = "<p>" + category.description + "</p><ul data-role='listview' data-inset='true'>",
+
+            // The array of items for this category.
+            cItems = category.items,
+
+            // The number of items in the category.
+            numItems = cItems.length;
+
+        // Generate a list item for each item in the category
+        // and add it to our markup.
+        for ( var i = 0; i < numItems; i++ ) {
+            markup += "<li>" + cItems[i].name + "</li>";
+        }
+        markup += "</ul>";
+
+        // Find the h1 element in our header and inject the name of
+        // the category into it.
+        $header.find( "h1" ).html( category.name );
+
+        // Inject the category items markup into the content element.
+        $content.html( markup );
+
+        // Pages are lazily enhanced. We call page() on the page
+        // element to make sure it is always enhanced before we
+        // attempt to enhance the listview markup we just injected.
+        // Subsequent calls to page() are ignored since a page/widget
+        // can only be enhanced once.
+        $page.page();
+
+        // Enhance the listview we just injected.
+        $content.find( ":jqmData(role=listview)" ).listview();
+
+        // We don't want the data-url of the page we just modified
+        // to be the url that shows up in the browser's location field,
+        // so set the dataUrl option to the URL for the category
+        // we just loaded.
+        options.dataUrl = urlObj.href;
+
+        // Now call changePage() and tell it to switch to
+        // the page we just modified.
+        $.mobile.changePage( $page, options );
+    }
+}
+
+<ul data-role="listview" data-inset="true" data-theme="d" data-divider-theme="d">
+				<li data-role="list-divider">Links that will be Ajax-loaded with page transitions</li>
+				<li><a href="../../index.html">Link in the same domain</a></li>
+				<li><a href="../pages/dialog.html" data-rel="dialog">Dialog link: data-rel="dialog" (not tracked in history)</a></li>
+				<li data-role="list-divider">Links that will refresh the page</li>
+				<li><a href="http://www.jquery.com">External domain</a></li>
+				<li><a href="../../index.html" rel="external">Link with rel="external"</a></li>
+				<li><a href="index.html" data-ajax="false">link with [data-ajax="false"]</a></li>
+				<li><a href="../../index.html" target="foo">Link with target="foo"</a></li>
+				<li data-role="list-divider">Email links</li>
+				<li><a href="mailto:jdoe@foo.com">Basic email: mailto:jdoe@foo.com</a></li>
+				<li><a href="mailto:jdoe@foo.com?cc=bill@bar.com&bcc=mark@abc.com&subject=Happy%20Birthday&body=Best%20wishes!">Mailto with a cc:, bcc:, subject and body pre-filled</a></li>
+
+				<li data-role="list-divider">Phone links</li>
+				<li><a href="tel:15555555555">Phone: tel:15555555555</a></li>
+				<li data-role="list-divider">Other</li>
+				<li><a href="#">A href="#" will return false</a></li>
+			</ul>
+			
+			Textarea fields
+1
+2
+$('body').prepend('<textarea id="myTextArea"></textarea>');
+$('#myTextArea').textinput();
+view raw2011-12-14-01.js hosted with ? by GitHub
+Text input fields
+1
+2
+$('body').prepend('<input type="text" id="myTextField" />');
+$('#myTextField').textinput();
+view raw2011-12-14-02.js hosted with ? by GitHub
+Buttons
+1
+2
+$('body').append('<a href="" data-theme="e" id="myNewButton">testing</a>');
+$('#myNewButton').button();
+view raw2011-12-14-03.js hosted with ? by GitHub
+Combobox or select dropdowns
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+<label for="sCountry">Country:</label>
+<select name="sCountry" id="sCountry">
+	<option value="">Where You Live:</option>
+	<option value="ad">Andorra</option>
+	<option value="ae">United Arab Emirates</option>
+</select>
+ 
+var myselect = $("#sCountry");
+myselect[0].selectedIndex = 3;
+myselect.selectmenu('refresh');
+view raw2011-12-14-04.js hosted with ? by GitHub
+Listviews
+1
+2
+3
+4
+5
+6
+7
+<ul id="myList" data-role="listview" data-inset="true">
+	<li>Acura</li>
+	<li>Audi</li>
+	<li>BMW</li>
+</ul>
+ 
+$('#mylist').listview('refresh');
+view raw2011-12-14-05.js hosted with ? by GitHub
+Slider control
+1
+2
+3
+4
+5
+6
+<div data-role="fieldcontain">
+	<label for="slider-2">Input slider:</label>
+	<input type="range" id="slider-2" value="25" min="0" max="100" />
+</div>
+ 
+$('#slider-2').val(80).slider('refresh');
+view raw2011-12-14-06.js hosted with ? by GitHub
+Toggle switch
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+<div data-role="fieldcontain">
+	<label for="toggle">Flip switch:</label>
+	<select name="toggle" id="toggle" data-role="slider">
+		<option value="off">Off</option>
+		<option value="on">On</option>
+	</select> 
+</div>
+ 
+var myswitch = $("#toggle");
+myswitch[0].selectedIndex = 1;
+myswitch .slider("refresh");
+view raw2011-12-14-07.js hosted with ? by GitHub
+Radio buttons
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+<div data-role="fieldcontain">
+    <fieldset data-role="controlgroup" data-type="horizontal">
+     	<legend>Layout view:</legend>
+         	<input type="radio" name="radio-view" value="list"  />
+         	<label for="radio-view-a">List</label>
+         	<input type="radio" name="radio-view" value="grid"  />
+         	<label for="radio-view-b">Grid</label>
+         	<input type="radio" name="radio-view" value="gallery"  />
+         	<label for="radio-view-c">Gallery</label>
+    </fieldset>
+</div>
+ 
+$("input[value=grid]").attr('checked',true).checkboxradio('refresh');
+view raw2011-12-14-08.js hosted with ? by GitHub
+Checkboxes
+1
+2
+3
+4
+5
+6
+7
+8
+9
+<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend>Agree to the terms:</legend>
+		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
+		<label for="checkbox-1">I agree</label>
+	</fieldset>
+</div>
+ 
+$('#checkbox-1').attr('checked',true).checkboxradio('refresh');
+view raw2011-12-14-09.js hosted with ? by GitHub
+
+
+//transition to the "about us" page with a slideup transition
+$.mobile.changePage( "about/us.html", { transition: "slideup"} );
+
+//transition to the "search results" page, using data from a form with an ID of "search"
+$.mobile.changePage( "searchresults.php", {
+	type: "post",
+	data: $("form#search").serialize()
+});
+http://demos.jquerymobile.com/1.1.2/docs/api/methods.html
+jQuery Mobile exposes several methods and properties on the $.mobile object for use in your applications.
+
+$.mobile.changePage (method)
+Programmatically change from one page to another. This method is used internally for the page loading and transitioning that occurs as a result of clicking a link or submitting a form, when those features are enabled.
+· Arguments
+to (string or object, required)
+String: Absolute or relative URL. ("about/us.html")
+Object: jQuery collection object. ($("#about"))
+options (object, optional)
+Properties:
+allowSamePageTransition (boolean,	default:	false) By default, changePage() ignores requests to change to the current active page. Setting this option to true, allows the request to execute. Developers should note that some of the page transitions assume that the fromPage and toPage of a changePage request are different, so they may not animate as expected. Developers are responsible for either providing a proper transition, or turning it off for this specific case.
+changeHash (boolean,	default:	true) Decides if the hash in the location bar should be updated.
+data (object or	string,	default: undefined) The data to send with an Ajax page request.
+Used only when the 'to' argument of changePage() is a URL.
+dataUrl (string,	default: undefined) The URL to use when updating the browser location upon changePage completion. If not specified, the value of the data-url attribute of the page element is used.
+pageContainer (jQuery collection,	default: $.mobile.pageContainer) Specifies the element that should contain the page.
+reloadPage (boolean, default: false) Forces a reload of a page, even if it is already in the DOM of the page container.
+Used only when the 'to' argument of changePage() is a URL.
+reverse (boolean,	default:	false) Decides what direction the transition will run when showing the page.
+role (string,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.
+showLoadMsg (boolean,	default:	true) Decides whether or not to show the loading message when loading external pages.
+transition (string,	default: $.mobile.defaultPageTransition)	The transition to use when showing the page.
+type (string, default: "get") Specifies the method ("get" or "post") to use when making a page request.
+Used only when the 'to' argument of changePage() is a URL.
+Examples:
+	$.mobile.changePage( "searchresults.php", {
+	type: "post",
+	data: $("form#search").serialize()
+});		
+//transition to the "about us" page with a slideup transition
+$.mobile.changePage( "about/us.html", { transition: "slideup"} );
+
+//transition to the "search results" page, using data from a form with an id of "search"
+$.mobile.changePage( "searchresults.php", {
+	type: "post",
+	data: $("form#search").serialize()
+});
+Ok, so the answer here seems obvious now but it is still interesting to note. Thanks to Gajores for the hint. If you have dynamic content inserted into the DOM and a JQuery on() event handler is attached to a dynamic element, you must register the event handlers dynamically after insertion. If the JQuery on() event handler is attached to a static DOM element but refers to a dynamic element inside it can be attached as the DOM is loaded, even if the dynamic element is not there.
+
+I must say, this is the type of stuff that the documentation does not always explain well to the intermediate user.
+//transition to the "confirm" page with a "pop" transition without tracking it in history	
+$.mobile.changePage( "../alerts/confirm.html", {
+	transition: "pop",
+	reverse: false,
+	changeHash: false
+});
+
+			
+			
+$.mobile.loadPage (method)
+Load an external page, enhance its content, and insert it into the DOM. This method is called internally by the changePage() function when its first argument is a URL. This function does not affect the current active page so it can be used to load pages in the background. The function returns a deferred promise object that gets resolved after the page has been enhanced and inserted into the document.
+· Arguments
+url (string or object, required) A relative or absolute URL.
+options (object, optional)
+Properties:
+data (object or	string,	default: undefined) The data to send with an Ajax page request.
+loadMsgDelay (number (in ms), default: 50) Forced delay before the loading message is shown. This is meant to allow time for a page that has already been visited to be fetched from cache without a loading message.
+pageContainer (jQuery collection,	default: $.mobile.pageContainer) Specifies the element that should contain the page after it is loaded.
+reloadPage (boolean, default: false) Forces a reload of a page, even if it is already in the DOM of the page container.
+role (string,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.
+type (string, default: "get") Specifies the method ("get" or "post") to use when making a page request.
+Examples:
+			
+//load the "about us" page into the DOM
+$.mobile.loadPage( "about/us.html" );
+
+//load a "search results" page, using data from a form with an id of "search"
+$.mobile.loadPage( "searchresults.php", {
+	type: "post",
+	data: $("form#search").serialize()
+});
+			
+			
+$.fn.jqmData(), $.fn.jqmRemoveData() (method)
+When working with jQuery Mobile, jqmData and jqmRemoveData should be used in place of jQuery core's data and removeData methods (note that this includes $.fn.data, $.fn.removeData, and the $.data, $.removeData, and $.hasData utilities), as they automatically incorporate getting and setting of namespaced data attributes (even if no namespace is currently in use).
+· Arguments:
+See jQuery's data and removeData methods
+Note: Calling jqmData() with no argument will return undefined. This behavior is subject to change in future versions.
+· Also:
+When finding elements by their jQuery Mobile data attribute, please use the custom selector :jqmData(). It automatically incorporates namespaced data attributes into the lookup when they are in use. For example, instead of calling $("div[data-role='page']"), you should use $("div:jqmData(role='page')"), which internally maps to $("div[data-"+ $.mobile.ns +"role='page']") without forcing you to concatenate a namespace into your selectors manually.
+
+One exception to this rule is selecting on namespaced data attributes with URL values, e.g the :jqmData(url) that jQuery Mobile uses to track where a page came from. This is because the selector requires a closing parentheses but the parentheses is also valid URL character.
+
+$.fn.jqmEnhanceable() (method)
+For users that wish to respect data-enhance=false parent elements during manual enhancement or custom plugin authoring jQuery Mobile provides the $.fn.jqmEnhanceable filter method.
+· Settings:
+If, and only if, $.mobile.ignoreContentEnabled is set to true, this method will traverse the parent nodes for each DOM element in the jQuery object and where it finds a data-enhance=false parent the child will be removed from the set.
+· Warning:
+The operation of traversing all parent elements can be expensive for even small jQuery object sets.
+$.fn.jqmHijackable() (method)
+For users that wish to respect data-ajax=false parent elements during custom form and link binding jQuery Mobile provides the $.fn.jqmHijackable filter method.
+· Settings:
+If, and only if, $.mobile.ignoreContentEnabled is set to true, this method will traverse the parent nodes for each DOM element in the jQuery object and where it finds a data-ajax=false parent the child form or link will be removed from the set.
+· Warning:
+The operation of traversing all parent elements can be expensive for even small jQuery object sets.
+$.mobile.showPageLoadingMsg (method)
+Show the page loading message, which is configurable via $.mobile.loadingMessage.
+· Arguments
+theme (string, default: "a") The theme swatch for the message.
+msgText (string, default: "loading") The text of the message.
+textonly (boolean, default: false) If true, the "spinner" image will be hidden when the message is shown.
+Examples:
+			
+//cue the page loader
+$.mobile.showPageLoadingMsg();
+
+//use theme swatch "b", a custom message, and no spinner
+$.mobile.showPageLoadingMsg("b", "This is only a test", true);
+			
+			
+$.mobile.hidePageLoadingMsg (method)
+Hide the page loading message, which is configurable via $.mobile.loadingMessage.
+Example:
+			
+//hide the page loader
+$.mobile.hidePageLoadingMsg();
+			
+			
+$.mobile.fixedToolbars.show (method)
+Utility method for displaying the fixed header and/or footer of the current active page within the viewport. Note that fixed headers/footers are never really hidden. Toggling the show/hide state of a toolbar is really toggling whether or not they are inline within the page content, or displayed within the viewport as if they were fixed.
+· Arguments
+immediately (boolean, optional) If true, any fixed header or footer for the current active page is displayed immediately within the viewport. If false or unspecified, the fixed header/footer will fade-in after a 100 millisecond delay. Note that other events such as a document resize or scroll event can result in an additional delay before the start of the header/footer display animation.
+Example:
+			
+// Show fixed header/footer with a fade animation.
+$.mobile.fixedToolbars.show();
+
+// Show fixed header/footer immediately.
+$.mobile.fixedToolbars.show(true);
+			
+			
+$.mobile.fixedToolbars.hide (method)
+Utility method for hiding the fixed header and/or footer of the current active page.
+· Arguments
+immediately (boolean, optional) If true, any fixed header or footer for the current active page is immediately placed inline (back in flow) with the page content, which means it will scroll along with the content and will only be visible when viewing the top or bottom of the page within the viewport. If false or unspecified, the fixed header/footer will fade-out after a 100 millisecond delay. Note that other events such as a document resize or scroll event can result in the header/footer being immediately hidden.
+Example:
+			
+// Hide fixed header/footer with a fade animation.
+$.mobile.fixedToolbars.hide();
+
+// Hide fixed header/footer immediately.
+$.mobile.fixedToolbars.hide(true);
+			
+			
+$.mobile.path.parseUrl (method)
+Utility method for parsing a URL and its relative variants into an object that makes accessing the components of the URL easy. When parsing relative variants, the resulting object will contain empty string values for missing components (like protocol, host, etc). Also, when parsing URLs that have no authority, such as tel: urls, the pathname property of the object will contain the data after the protocol/scheme colon.
+· Arguments
+url (string, required) A relative or absolute URL.
+· Return Value
+This function returns an object that contains the various components of the URL as strings. The properties on the object mimic the browser's location object:
+
+hash
+The fragment component of the URL, including the leading '#' character.
+host
+The host and port number of the URL.
+hostname
+The name of the host within the URL.
+href
+The original URL that was parsed.
+pathname
+The path of the file or directory referenced by the URL.
+port
+The port specified within the URL. Most URLs rely on the default port for the protocol used, so this may be an empty string most of the time.
+protocol
+The protocol for the URL including the trailing ':' character.
+search
+The query component of the URL including the leading '?' character.
+But it also contains additional properties that provide access to additional components as well as some common forms of the URL developers access:
+
+authority
+The username, password, and host components of the URL
+directory
+The directory component of the pathname, minus any filename.
+domain
+The protocol and authority components of the URL.
+filename
+The filename within the pathname component, minus the directory.
+hrefNoHash
+The original URL minus the fragment (hash) components.
+hrefNoSearch
+The original URL minus the query (search) and fragment (hash) components.
+password
+The password contained within the authority component.
+username
+The username contained within the authority component.
+Examples:
+			
+// Parsing the Url below results an object that is returned with the
+// following properties:
+//
+//  obj.href:         http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234&type=unread#msg-content
+//  obj.hrefNoHash:   http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234&type=unread
+//  obj.hrefNoSearch: http://jblas:password@mycompany.com:8080/mail/inbox
+//  obj.domain:       http://jblas:password@mycompany.com:8080
+//  obj.protocol:     http:
+//  obj.authority:    jblas:password@mycompany.com:8080
+//  obj.username:     jblas
+//  obj.password:     password
+//  obj.host:         mycompany.com:8080
+//  obj.hostname:     mycompany.com
+//  obj.port:         8080
+//  obj.pathname:     /mail/inbox
+//  obj.directory:    /mail/
+//  obj.filename:     inbox
+//  obj.search:       ?msg=1234&type=unread
+//  obj.hash:         #msg-content
+
+var obj = $.mobile.path.parseUrl("http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234");
+			
+			
+$.mobile.path.makePathAbsolute (method)
+Utility method for converting a relative file or directory path into an absolute path.
+· Arguments
+relPath (string, required) A relative file or directory path.
+absPath (string, required) An absolute file or relative path to resolve against.
+· Return Value
+This function returns a string that is an absolute version of the relative path passed in.
+Examples:
+			
+// Returns: /a/b/c/file.html
+var absPath = $.mobile.path.makePathAbsolute("file.html", "/a/b/c/bar.html");
+
+// Returns: /a/foo/file.html
+var absPath = $.mobile.path.makePathAbsolute("../../foo/file.html", "/a/b/c/bar.html");
+
+			
+			
+$.mobile.path.makeUrlAbsolute (method)
+Utility method for converting a relative URL to an absolute URL.
+Arguments
+relUrl (string, required) A relative URL.
+absUrl (string, required) An absolute URL to resolve against.
+Return Value
+This function returns a string that is an absolute version of the relative URL passed in.
+Examples:
+			
+// Returns: http://foo.com/a/b/c/file.html
+var absUrl = $.mobile.path.makeUrlAbsolute("file.html", "http://foo.com/a/b/c/test.html");
+
+// Returns: http://foo.com/a/foo/file.html
+var absUrl = $.mobile.path.makeUrlAbsolute("../../foo/file.html", "http://foo.com/a/b/c/test.html");
+
+// Returns: http://foo.com/bar/file.html
+var absUrl = $.mobile.path.makeUrlAbsolute("//foo.com/bar/file.html", "http://foo.com/a/b/c/test.html");
+
+// Returns: http://foo.com/a/b/c/test.html?a=1&b=2
+var absUrl = $.mobile.path.makeUrlAbsolute("?a=1&b=2", "http://foo.com/a/b/c/test.html");
+
+// Returns: http://foo.com/a/b/c/test.html#bar
+var absUrl = $.mobile.path.makeUrlAbsolute("#bar", "http://foo.com/a/b/c/test.html");
+
+			
+			
+$.mobile.path.isSameDomain (method)
+Utility method for comparing the domain of 2 URLs.
+· Arguments
+url1 (string, required) A relative URL.
+url2 (string, required) An absolute URL to resolve against.
+Return Value
+This function returns a boolean true if the domains match, false if they don't.
+Examples:
+			
+// Returns: true
+var same = $.mobile.path.isSameDomain("http://foo.com/a/file.html", "http://foo.com/a/b/c/test.html");
+
+// Returns: false
+var same = $.mobile.path.isSameDomain("file://foo.com/a/file.html", "http://foo.com/a/b/c/test.html");
+
+// Returns: false
+var same = $.mobile.path.isSameDomain("https://foo.com/a/file.html", "http://foo.com/a/b/c/test.html");
+
+// Returns: false
+var same = $.mobile.path.isSameDomain("http://foo.com/a/file.html", "http://bar.com/a/b/c/test.html");
+
+			
+			
+$.mobile.path.isRelativeUrl (method)
+Utility method for determining if a URL is a relative variant.
+· Arguments
+url (string, required) A relative or absolute URL.
+· Return Value
+This function returns a boolean true if the URL is relative, false if it is absolute.
+Examples:
+			
+// Returns: false
+var isRel = $.mobile.path.isRelativeUrl("http://foo.com/a/file.html");
+
+// Returns: true
+var isRel = $.mobile.path.isRelativeUrl("//foo.com/a/file.html");
+
+// Returns: true
+var isRel = $.mobile.path.isRelativeUrl("/a/file.html");
+
+// Returns: true
+var isRel = $.mobile.path.isRelativeUrl("file.html");
+
+// Returns: true
+var isRel = $.mobile.path.isRelativeUrl("?a=1&b=2");
+
+// Returns: true
+var isRel = $.mobile.path.isRelativeUrl("#foo");
+
+
+			
+			
+$.mobile.path.isAbsoluteUrl (method)
+Utility method for determining if a URL is absolute.
+· Arguments
+url (string, required) A relative or absolute URL.
+· Return Value
+This function returns a boolean true if the URL is absolute, false if not.
+Examples:
+			
+// Returns: true
+var isAbs = $.mobile.path.isAbsoluteUrl("http://foo.com/a/file.html");
+
+// Returns: false
+var isAbs = $.mobile.path.isAbsoluteUrl("//foo.com/a/file.html");
+
+// Returns: false
+var isAbs = $.mobile.path.isAbsoluteUrl("/a/file.html");
+
+// Returns: false
+var isAbs = $.mobile.path.isAbsoluteUrl("file.html");
+
+// Returns: false
+var isAbs = $.mobile.path.isAbsoluteUrl("?a=1&b=2");
+
+// Returns: false
+var isAbs = $.mobile.path.isAbsoluteUrl("#foo");
+
+
+			
+			
+$.mobile.path.get (method)
+Utility method for determining the directory portion of an URL. If the URL has no trailing slash, the last component of the URL is considered to be a file.
+· Arguments
+url (string, required) A relative or absolute URL.
+· Return Value
+This function returns the directory portion of a given URL.
+Examples:
+			
+// Returns: http://foo.com/a/
+var dirName = $.mobile.path.get("http://foo.com/a/file.html");
+
+// Returns: http://foo.com/a/
+var dirName = $.mobile.path.get("http://foo.com/a/");
+
+// Returns: http://foo.com/a
+var dirName = $.mobile.path.get("http://foo.com/a");
+
+// Returns: //foo.com/a/
+var dirName = $.mobile.path.get("//foo.com/a/file.html");
+
+// Returns: /a/
+var dirName = $.mobile.path.get("/a/file.html");
+
+// Returns: ""
+var dirName = $.mobile.path.get("file.html");
+
+// Returns: /
+var dirName = $.mobile.path.get("/file.html");
+
+// Returns: ?a=1&b=2
+var dirName = $.mobile.path.get("?a=1&b=2");
+
+// Returns: foo
+var dirName = $.mobile.path.isAbsoluteUrl("#foo");
+
+
+			
+			
+$.mobile.base (methods, properties)
+Utilities for working with generated base element. TODO: document as public API is finalized.
+$.mobile.silentScroll (method)
+Scroll to a particular Y position without triggering scroll event listeners.
+· Arguments:
+yPos (number, defaults to 0). Pass any number to scroll to that Y location.
+Examples:
+			
+//scroll to Y 100px
+$.mobile.silentScroll(100);
+			
+			
+$.mobile.activePage (property)
+Reference to the page currently in view.
+$.mobile.document.on( "click", "#open-popupArrow", function( evt ) {
+    $( "#popupArrow" ).popup( "open", { x: evt.pageX, y: evt.pageY } );
+    evt.preventDefault();
+});

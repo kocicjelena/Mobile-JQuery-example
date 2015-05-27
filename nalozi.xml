@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+    <nalozi>
+    <zaduzen id="adv1">
+     <adv1>
+	 <url>http://localhost:8070/5/rashodi/rashodi.html#adv1</url>
+	  <ime>ime adv1</ime>
+	 <pbr>2</pbr>
+    <kbr>3</kbr>
+	<bpo>411</bpo>
+	 <zag>5</zag>
+	 <veza>veza taj i taj</veza>
+	 <okrivljen>OKRIVLJEN X</okrivljen>
+	 <vestak>VEŠTAK Y</vestak>
+	 <osiguranje>OSIGURANJE Z</osiguranje>
+	 </adv1>
+     </zaduzen>	 
+	<zaduzen id="adv1">
+     <adv1>
+	 <url>http://localhost:8070/5/rashodi/rashodi.html#adv1</url>
+	  <ime>ime adv1</ime>
+	 <pbr>22</pbr>
+    <kbr>33</kbr>
+	<bpo>412</bpo>
+	 <zag>6</zag>
+	  <veza>veza taj i onaj</veza>
+	 <okrivljen>OKRIVLJEN XX</okrivljen>
+	 <vestak>VEŠTAK YY</vestak>
+	 <osiguranje>OSIGURANJE ZZ</osiguranje>
+	 </adv1>
+     </zaduzen>
+<zaduzen id="adv2">
+    <adv2>
+	<url>http://localhost:8070/5/rashodi/rashodi.html#adv2</url>
+     <ime>ime adv2</ime>
+	 <pbr>111</pbr>
+    <kbr>333</kbr>
+	<bpo>421</bpo>
+	 <zag>7</zag>
+	  <veza>veza neko</veza>
+	 <okrivljen>OKRIVLJEN A</okrivljen>
+	 <vestak>VEŠTAK B</vestak>
+	 <osiguranje>OSIGURANJE C</osiguranje>
+	 </adv2>
+     </zaduzen>	 
+</nalozi>

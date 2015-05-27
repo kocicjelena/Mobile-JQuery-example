@@ -1,0 +1,25 @@
+{
+  "htmlFiles": [
+    {
+      "fileId": "0B5iQYkWzb76QblJRc0hjcHVITkE",
+      "contentType": "text/html",
+      "name": "index.html",
+      "path": "0B5iQYkWzb76QTUZaWHJWMFdweG8/"
+    }
+  ],
+  "cssFiles": [],
+  "javascriptFiles": [
+    {
+      "fileId": "0B5iQYkWzb76QVWFzRkdoVkkySDg",
+      "contentType": "text/javascript",
+      "name": "angular.min.js",
+      "path": "0B5iQYkWzb76QTUZaWHJWMFdweG8/"
+    },
+    {
+      "fileId": "0B5iQYkWzb76QVkNTTE5LTDRGUHM",
+      "contentType": "text/javascript",
+      "name": "script.js",
+      "path": "0B5iQYkWzb76QTUZaWHJWMFdweG8/"
+    }
+  ]
+}
