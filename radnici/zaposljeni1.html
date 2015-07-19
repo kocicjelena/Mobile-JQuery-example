@@ -19,7 +19,7 @@
 $(document).on('pagebeforechange', function() {
 $.ajax({
     type: "GET",
-    url: "http://localhost:8070/5/radnici/radnici.xml",
+    url: "https://github.com/kocicjelena/Mobile-JQuery-example/blob/gh-pages/radnici/radnici.xml",
     dataType: "xml",
     success: xmlParser2
    });
@@ -46,7 +46,7 @@ $.ajax({
  $(document).on('pageafterchange', function() {
 $.ajax({
     type: "GET",
-    url: "http://localhost:8070/5/nalozi.xml",
+    url: "https://github.com/kocicjelena/Mobile-JQuery-example/blob/gh-pages/radnici/nalozi.xml",
     dataType: "xml",
     success: xmlParserzaposljeni
    });
